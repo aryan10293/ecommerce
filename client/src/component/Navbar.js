@@ -5,7 +5,7 @@ function Navbar() {
         <header className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
             <a href="index.html">
-                <img src="assets/images/logo.svg" alt="Logo" className="w-32"/>
+                <img src="https://cashy.dk/storage/200/zk5okjsbxd3uwphxcywfafudcza7m5.png" alt="Logo" className="w-32"/>
             </a>
 
             <div className="w-full max-w-xl relative flex">
@@ -20,7 +20,7 @@ function Navbar() {
             </div>
 
             <div class="flex items-center space-x-4">
-                <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
                     <div className="text-2xl">
                         <i className="fa-solid fa-heart"></i>
                     </div>
@@ -29,7 +29,7 @@ function Navbar() {
                         claclassNamess="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
                 </a>
-                <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
                     <div className="text-2xl">
                         <i className="fa-solid fa-bag-shopping"></i>
                     </div>
@@ -38,7 +38,7 @@ function Navbar() {
                         claclassNamess="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
                 </a>
-                <a href="#" className="text-center text-gray-700 hover:text-primary transition relative">
+                <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
                     <div className="text-2xl">
                         <i className="fa-regular fa-user"></i>
                     </div>
