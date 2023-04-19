@@ -25,18 +25,18 @@ module.exports = {
         if (validationErrors.length) {
           console.log(validationErrors)
           req.flash("errors", validationErrors);
-          return res.redirect("../");
+          //return res.redirect("../");
         }
         req.body.email = validator.normalizeEmail(req.body.email, {
           gmail_remove_dots: false,
         });
         const user = new User({
+          userName: req.body.userName,
           email: req.body.email,
           password: req.body.password,
         });
-      console.log(user)
         User.findOne(
-          { $or: [{ email: req.body.email }, { name: req.body.name }] },
+          { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
           (err, existingUser) => {
             if (err) {
               return next(err);
@@ -45,7 +45,7 @@ module.exports = {
               req.flash("errors", {
                 msg: "Account with that email address or username already exists.",
               });
-              return res.redirect("../");
+             // return res.redirect("../");
             }
             user.save((err) => {
               if (err) {
