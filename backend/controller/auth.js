@@ -31,7 +31,6 @@ module.exports = {
           gmail_remove_dots: false,
         });
         const user = new User({
-          userName: req.body.name,
           email: req.body.email,
           password: req.body.password,
         });

@@ -8,6 +8,7 @@ const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
+const cors = require('cors')
 //const tweetRoutes = require("./routes/tweet");
 
 //Use .env file in config folder
@@ -20,7 +21,7 @@ require("./config/passport")(passport);
 connectDB();
 
 
-
+app.use(cors())
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
