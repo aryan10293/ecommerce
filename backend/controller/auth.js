@@ -12,6 +12,9 @@ module.exports = {
       res.render("login.ejs")
   },
     postCreateAccount: (req, res, next) => {
+      console.log(req.body)
+      // console.log(req.body.userName)
+      // console.log(req.body.email)
         const validationErrors = [];
         if (!validator.isEmail(req.body.email))
           validationErrors.push({ msg: "Please enter a valid email address." });
@@ -55,7 +58,7 @@ module.exports = {
                 if (err) {
                   return next(err);
                 }
-                res.redirect("/profile");
+                // res.redirect("/profile");
               });
             });
           }

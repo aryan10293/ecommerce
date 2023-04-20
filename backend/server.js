@@ -21,7 +21,7 @@ require("./config/passport")(passport);
 connectDB();
 
 
-app.use(cors())
+
 //Body Parsing
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -46,6 +46,13 @@ app.use(
 
   //Use flash messages for errors, info, ect...
   app.use(flash());
+
+
+  app.use(cors({
+  origin: 'http://localhost:3000',
+  methods: "GET,POST,PUT,DELETE",
+  credentials: true
+}))
   
   //Setup Routes For Which The Server Is Listening
    app.use("/", mainRoutes);

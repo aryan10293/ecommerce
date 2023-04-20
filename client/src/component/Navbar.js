@@ -19,14 +19,14 @@ function Navbar() {
                     className="bg-primary border border-primary text-black px-8 rounded-r-md hover:bg-transparent hover:text-primary transition">Search</button>
             </div>
 
-            <div class="flex items-center space-x-4">
+            <div className="flex items-center space-x-4">
                 <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
                     <div className="text-2xl">
                         <i className="fa-solid fa-heart"></i>
                     </div>
                     <div className="text-xs leading-3">lol</div>
                     <div
-                        claclassNamess="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
                 </a>
                 <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
@@ -35,7 +35,7 @@ function Navbar() {
                     </div>
                     <div className="text-xs leading-3">Cart</div>
                     <div
-                        claclassNamess="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
+                        className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
                 </a>
                 <a href="google.com" className="text-center text-gray-700 hover:text-primary transition relative">
