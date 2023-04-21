@@ -3,6 +3,11 @@ import React from 'react'
 function login() {
     const handleSubmit = async (e) => {
         e.preventDefault()
+        await fetch('http://localhost:2011/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+           // body: JSON.stringify(newUser)            
+        })
         //const loginData = await fetch()
         console.log('lol')
     }

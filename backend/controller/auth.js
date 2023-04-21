@@ -58,7 +58,11 @@ module.exports = {
                 if (err) {
                   return next(err);
                 }
+                //return next()
                 // res.redirect("/profile");
+                res.send({
+                  "success": "true"
+                })
               });
             });
           }
