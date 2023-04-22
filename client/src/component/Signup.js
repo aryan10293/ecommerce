@@ -40,19 +40,21 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-         await fetch('http://localhost:2011/createaccount',{
+        const reg = await fetch('http://localhost:2011/createaccount',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newUser),
         })
-        //const data = reg.json()
+        const data = await reg.json()
+        console.log(data)
         setPassword('')
         setEmail('')
         setName('')
-        window.location.href = "/login"
+        //window.location.href = "/login"
         } catch(err) {
             console.error(err)
         }
+
     }
   return (
     <div>

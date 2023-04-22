@@ -61,7 +61,7 @@ module.exports = {
                 //return next()
                 // res.redirect("/profile");
                 res.send({
-                  "success": "true"
+                  "newUser": user
                 })
               });
             });
