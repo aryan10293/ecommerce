@@ -1,18 +1,57 @@
 import React from 'react'
 
-function login() {
+function Login() {
+    const [email, setEmail] = React.useState('')
+    const [password, setPassword] = React.useState('')
+    const [current, setCurrentUser] = React.useState({
+        email: '',
+        password: '',
+    })
+
+        const handleChangeEmail = (e) => {
+        setEmail(e.target.value)
+        setCurrentUser({
+            email: e.target.value,
+            password: password,
+        })
+    }
+
+        const handleChangePassword = (e) => {
+        setPassword(e.target.value)
+        setCurrentUser({
+            email: email,
+            password: e.target.value,
+        })
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
-        await fetch('http://localhost:2011/login', {
+
+       const login =  await fetch('http://localhost:2011/login', {
             method: 'POST',
+            credentials: 'include',
             headers: {'Content-Type': 'application/json'},
-           // body: JSON.stringify(newUser)            
+            body: JSON.stringify(current),        
         })
-        //const loginData = await fetch()
-        console.log('lol')
+        const loginData = await login.json()
+        console.log(loginData)
+        //window.location.href = "/dashboard"
     }
+      const checkUser = async (e) => {
+try {
+  const response = await fetch('http://localhost:2011/idk', {
+    method: 'GET',
+    credentials: 'include'
+  });
+  const data = await response.json();
+  console.log(data);
+} catch (error) {
+  console.error(error);
+}
+  }
   return (
     <div>
+    <button onClick={checkUser}>lol</button>
         <section className="h-screen">
         <div className="h-full">
             <div
@@ -98,7 +137,9 @@ function login() {
                         type="text"
                         className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         id="exampleFormControlInput2"
-                        placeholder="Email address" />
+                        placeholder="Email address" 
+                        onChange={handleChangeEmail}
+                        />
                         <label
                         htmlFor="exampleFormControlInput2"
                         className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
@@ -112,7 +153,9 @@ function login() {
                         type="password"
                         className="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[2.15] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         id="exampleFormControlInput22"
-                        placeholder="Password" />
+                        placeholder="Password" 
+                        onChange={handleChangePassword}
+                        />
                         <label
                         htmlFor="exampleFormControlInput22"
                         className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[2.15] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[1.15rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[1.15rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
@@ -168,4 +211,4 @@ function login() {
   )
 }
 
-export default login
+export default Login

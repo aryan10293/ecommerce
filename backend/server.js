@@ -9,13 +9,13 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 //const tweetRoutes = require("./routes/tweet");
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./config/.env" });
 
 // Passport config
-require("./config/passport")(passport);
 
 //Connect To Database
 connectDB();
@@ -29,7 +29,6 @@ app.use(express.json());
 //Logging
 app.use(logger("dev"));
 
-
 // Setup Sessions - stored in MongoDB
 app.use(
     session({
@@ -39,11 +38,11 @@ app.use(
       store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   );
-  
+  app.use(cookieParser("keyboard cat"))
   // Passport middleware
   app.use(passport.initialize());
   app.use(passport.session());
-
+  require("./config/passport")(passport);
   //Use flash messages for errors, info, ect...
   app.use(flash());
 
@@ -57,7 +56,9 @@ app.use(
   //Setup Routes For Which The Server Is Listening
    app.use("/", mainRoutes);
    //app.use("/tweet", tweetRoutes);
-  
+// app.post('/login', passport.authenticate('local'), (req, res) => {
+//   res.send(req.user);
+// });
   //Server Running
   app.listen(process.env.PORT, () => {
     console.log("Server is running, you better catch it!");

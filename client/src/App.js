@@ -7,6 +7,13 @@ import Signup from './component/Signup';
 import Home from './component/Home'
 function App() {
   let user = true
+
+  // const checkUser = async (e) => {
+  //   const check = await fetch('http://localhost:2011/idk', {withCredentials: true})
+  //   const data = await check.json()
+  //   console.log(data)
+  // }
+  // checkUser()
   return (
     <>
       <Routes>

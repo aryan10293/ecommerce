@@ -28,7 +28,6 @@ function Signup() {
         })
     }
     const handleChangePassword = (e) => {
-        console.log(password)
         setPassword(e.target.value)
         setNewUser({
             userName: name,

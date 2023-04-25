@@ -96,7 +96,12 @@ module.exports = {
               return next(err);
             }
             req.flash("success", { msg: "Success! You are logged in." });
-            res.redirect(req.session.returnTo || "/profile");
+            console.log(req.user)
+            // res.redirect(req.session.returnTo || res.send({
+            //   "currentUser": req.user
+            // }));
+            
+            res.send(req.session.returnTo || {"currentUser": req.user})
           });
         })(req, res, next);
       },
@@ -110,5 +115,10 @@ module.exports = {
           req.user = null;
           res.redirect("/");
         });
-      }
+      },
+      checkUser:  async (req,res) => {
+        const lol = await User.find()
+        console.log(lol)
+        res.send({ "user":req.user })
+    }
 }

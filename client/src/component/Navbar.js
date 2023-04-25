@@ -1,8 +1,14 @@
 import React from 'react'
 
 function Navbar() {
+  const checkUser = async (e) => {
+    const check = await fetch('http://localhost:2011/idk')
+    const data = await check.json()
+    console.log(data)
+  }
   return (
         <header className="py-4 shadow-sm bg-white">
+        <button onClick={checkUser}>lol</button>
         <div className="container flex items-center justify-between">
             <a href="index.html">
                 <img src="https://cashy.dk/storage/200/zk5okjsbxd3uwphxcywfafudcza7m5.png" alt="Logo" className="w-32"/>
