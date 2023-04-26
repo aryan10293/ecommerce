@@ -119,6 +119,6 @@ module.exports = {
       checkUser:  async (req,res) => {
         const lol = await User.find()
         console.log(lol)
-        res.send({ "user":req.user })
+        res.send( req.user )
     }
 }

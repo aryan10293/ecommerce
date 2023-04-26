@@ -1,8 +1,9 @@
 import React from 'react'
-
+import checkUser from './checkUser'
 function Login() {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+  //  const [user, setUser] = React.useState({})
     const [current, setCurrentUser] = React.useState({
         email: '',
         password: '',
@@ -34,21 +35,10 @@ function Login() {
             body: JSON.stringify(current),        
         })
         const loginData = await login.json()
+       // setUser(loginData)
         console.log(loginData)
         //window.location.href = "/dashboard"
     }
-      const checkUser = async (e) => {
-try {
-  const response = await fetch('http://localhost:2011/idk', {
-    method: 'GET',
-    credentials: 'include'
-  });
-  const data = await response.json();
-  console.log(data);
-} catch (error) {
-  console.error(error);
-}
-  }
   return (
     <div>
     <button onClick={checkUser}>lol</button>

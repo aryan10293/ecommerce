@@ -1,14 +1,24 @@
 import React from 'react'
-
 function Navbar() {
-  const checkUser = async (e) => {
-    const check = await fetch('http://localhost:2011/idk')
-    const data = await check.json()
-    console.log(data)
-  }
+    // const [user, setUser] = React.useState()
+    // const checkUser = async (setState) => {
+    //     try {
+    //     const response = await fetch('http://localhost:2011/idk', {
+    //         method: 'GET',
+    //         credentials: 'include'
+    //     });
+    //     const data = await response.json();
+    //     setState(data)
+    //     } catch (error) {
+    //     console.error(error);
+    //     }
+    // }
+    const lol = () => {
+        //console.log(user.userName)
+    }
   return (
         <header className="py-4 shadow-sm bg-white">
-        <button onClick={checkUser}>lol</button>
+        <button onClick={lol}>lol</button>
         <div className="container flex items-center justify-between">
             <a href="index.html">
                 <img src="https://cashy.dk/storage/200/zk5okjsbxd3uwphxcywfafudcza7m5.png" alt="Logo" className="w-32"/>
