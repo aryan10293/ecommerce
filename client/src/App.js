@@ -2,14 +2,14 @@ import './App.css';
 import React, { useEffect } from 'react';
 import { Fragment } from 'react';
 import {Route, Routes, Navigate} from "react-router-dom"
-import Navbar from './component/Navbar';
+import Dashboard from './component/Dashboard';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import Home from './component/Home'
 function App() {
   const [user,setUser] = React.useState(null)
   const [isLoading, setIsLoading] = React.useState(true)
-
+  let userLogin = false
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:2011/idk', {
@@ -22,21 +22,33 @@ function App() {
     }
     fetchData()
   },[])
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  //console.log(Object.keys(user))
+  // console.log(user)
+  if(user !== null){
+    userLogin = true
+  }
   return (
     <>
-
-
+        <div>
+        </div>
       <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/login" element={!user ? <Login />: <Navigate  to='/dashboard'/>  } />
-          <Route path="/signup" element={!user ? <Signup />: <Navigate  to='/dashboard'/>  } />
+          <Route 
+          path="/dashboard"
+          element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/signup'/>} />
+
+          <Route 
+          path='/'
+          element={!userLogin ? <Home /> : <Navigate to='/dashboard'/>} />
+
+          <Route 
+          path='/login'
+          element={!userLogin ? <Login /> : <Navigate to='/dashboard'/>} />
+
+          <Route 
+          path='/signup'
+          element={!userLogin ? <Signup /> : <Navigate to='/dashboard'/>} />
       </Routes>
 
     </>
