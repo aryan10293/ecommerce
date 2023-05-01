@@ -22,17 +22,16 @@ function App() {
     }
     fetchData()
   },[])
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
   // console.log(user)
   if(user !== null){
     userLogin = true
   }
+  //console.log(user)
   return (
     <>
-        <div>
-        </div>
       <Routes>
           <Route 
           path="/dashboard"
