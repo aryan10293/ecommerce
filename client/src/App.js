@@ -8,7 +8,6 @@ import Signup from './component/Signup';
 import Home from './component/Home'
 function App() {
   const [user,setUser] = React.useState(null)
-  const [isLoading, setIsLoading] = React.useState(true)
   let userLogin = false
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +17,6 @@ function App() {
       })
       const data = await response.json()
       setUser(data)
-      setIsLoading(false)
     }
     fetchData()
   },[])
