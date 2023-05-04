@@ -14,6 +14,13 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
-        console.log(req.user)
+    },
+    getWishList: async (req,res) => {
+        try {
+           let cool =  await User.find(req.user)   
+           res.send(cool[0].wishlist)         
+        } catch (error) {
+            console.error(error)
+        }
     }
 }

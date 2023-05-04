@@ -11,6 +11,7 @@ router.post('/login', authController.postLogin)
 
 router.get("/logout", authController.logout)
 router.get("/idk", authController.checkUser)
+router.get('/wish', crudController.getWishList)
 
 router.put('/wish', crudController.addWish)
 module.exports = router;

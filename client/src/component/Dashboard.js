@@ -1,23 +1,36 @@
 import React from 'react'
 import { Fragment } from 'react'
-//import user from '../../../backend/model/user';
 import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-//import addToWish from './addToWish'
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
-  const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
-  //const userWishlist = Number(props.state.wishlist[0].id) 
-  // const likes = [...document.querySelectorAll('.likes')]
-  // console.log(likes)
+  const [wishList, setWishlist] = React.useState([]);
+  // this use effect is to get all the wishlist items in the user wishlist form the database and set it to the sate of wishlist 
+    React.useEffect( () => {
+     async function getWishList(){
+        try {
+        const response = await fetch('http://localhost:2011/wish', {
+            method: 'GET',
+            credentials: 'include'
+        });
+        const data = await response.json();
+        console.log(data)
+        setWishlist(data)
+        } catch (error) {
+        console.error(error);
+        }
+     }
+     getWishList()
+     //setWishlist(wishList.map(item => item.id))
+  }, []);
+// this use efrfect is to get all the products from the product api so i can render them on the dashboard display
   React.useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch('https://dummyjson.com/products');
         const data = await response.json();
         setData([...data.products]);
-        //console.log(data.products[0].id === userWishlist)
       } catch (error) {
         console.error(error);
       }
@@ -41,6 +54,7 @@ function Dashboard(props) {
           'imgSrc': imgSrc,
           'brand': brand,
           'item': item,
+          'liked': true
     }
         try {
             const response = await fetch('/wish', {
@@ -48,31 +62,15 @@ function Dashboard(props) {
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)
                 })
-            const data = await response.json()
-            console.log(data)
+            const dataUpdate = await response.json()
+            setWishlist(wishList => wishList.push(dataUpdate))
         } catch (error) {
             console.log(error)
         }
  }
  add()
-    //addToWish(e)
-    //console.log(cool)
-    setWishlist([...wishList, productData])
+
   }
-
-
-//console.log(wishList[1].id === undefined)
-
-
-
-
-
-
-
-
-    React.useEffect(() => {
-    console.log('wishlist updated:', wishList);
-  }, [wishList]);
   return (
     <>
         <Navbar />
@@ -104,11 +102,10 @@ function Dashboard(props) {
                                 </div>
                               </div>
                               <div className="mr-auto">
-                                  {wishList[i] !== undefined ? 
-                                   wishList[i].id === item.id ?
+                                {
+                                  wishList.map(x => x.id).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
-                                  <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
-                                  <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>}                                
+                                  <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
                               </div>
                           </div>
                         </div>
@@ -123,4 +120,4 @@ function Dashboard(props) {
 }
 
 export default Dashboard
-// <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>
+// <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>  

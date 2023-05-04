@@ -101,7 +101,7 @@ module.exports = {
             //   "currentUser": req.user
             // }));
             
-            res.send(req.session.returnTo || {"currentUser": req.user})
+            res.send( {"currentUser": req.user})
           });
         })(req, res, next);
       },
@@ -118,7 +118,6 @@ module.exports = {
       },
       checkUser:  async (req,res) => {
         const lol = await User.find()
-        console.log(lol)
         res.send( req.user )
     }
 }
