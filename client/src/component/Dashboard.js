@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import AddToCart from './AddToCart'
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
@@ -106,6 +107,7 @@ function Dashboard(props) {
                                   wishList.map(x => x.id).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
+                                  <AddToCart state={props.state}/>
                               </div>
                           </div>
                         </div>

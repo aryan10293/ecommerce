@@ -14,4 +14,5 @@ router.get("/idk", authController.checkUser)
 router.get('/wish', crudController.getWishList)
 
 router.put('/wish', crudController.addWish)
+router.put('/cart', crudController.addCart)
 module.exports = router;
