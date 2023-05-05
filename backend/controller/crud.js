@@ -15,6 +15,19 @@ module.exports = {
             console.error(error)
         }
     },
+        deleteWish: async (req,res) => {
+        console.log('delete has started ')
+        try {
+            await User.findOneAndUpdate(
+                {_id: req.user.id},
+                {
+                    $pull: { wishlist: req.body },
+                }
+            )            
+        } catch (error) {
+            console.error(error)
+        }
+    },
     addCart: async (req,res) => {
     try {
         await User.findOneAndUpdate(

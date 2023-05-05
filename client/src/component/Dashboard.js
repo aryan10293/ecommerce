@@ -4,6 +4,8 @@ import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToCart from './AddToCart'
+import handleAdd from './handleadd'
+import handleDelete from './handleDelete'
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
@@ -32,6 +34,7 @@ function Dashboard(props) {
     const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
     const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
     let productData
+    let method;
    // console.log(e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML)
     async function add(){
            productData = {
@@ -41,9 +44,10 @@ function Dashboard(props) {
           'brand': brand,
           'item': item,
     }
+    wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {
             const response = await fetch('/wish', {
-                method: 'PUT',
+                method: method,
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)
                 })
@@ -56,7 +60,13 @@ function Dashboard(props) {
  add()
     //addToWish(e)
     //console.log(cool)
-    setWishlist([...wishList, productData])
+    if(method === 'PUT'){
+      setWishlist([...wishList, productData])
+    } else {
+      let newList = wishList.filter(x => x.id !== productData.id )
+      setWishlist(newList)
+    }
+
   }
 
 

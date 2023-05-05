@@ -15,4 +15,6 @@ router.get('/wish', crudController.getWishList)
 
 router.put('/wish', crudController.addWish)
 router.put('/cart', crudController.addCart)
+
+router.delete('/wish', crudController.deleteWish)
 module.exports = router;
