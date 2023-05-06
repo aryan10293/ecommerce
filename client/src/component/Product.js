@@ -1,11 +1,12 @@
 import React from 'react'
+import { Fragment } from 'react'
+import Navbar from './Navbar'
+//import { useDispatch } from "react-redux";
+//import { addProduct } from "../redux/cartSlice"
 
-import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartSlice"
 
-
-const Product = ({ props }) => {
-
+const Product = (props) => {
+    const product = props.state
     const [activeImg, setActiveImg] = React.useState(0)
     const [itemQuantity, setItemQuantity] = React.useState(0)
     const [item, setItem] = React.useState({
@@ -15,55 +16,58 @@ const Product = ({ props }) => {
     })
 
 
-    const dispatch = useDispatch()
+  //  const dispatch = useDispatch()
 
-    const images = [
-        { src: 'images/productImgs/image-product-1.jpg' },
-        { src: 'images/productImgs/image-product-2.jpg' },
-        { src: 'images/productImgs/image-product-3.jpg' },
-        { src: 'images/productImgs/image-product-4.jpg' }
+    const image = [
+        // { src: 'images/productImgs/image-product-1.jpg' },
+        // { src: 'images/productImgs/image-product-2.jpg' },
+        // { src: 'images/productImgs/image-product-3.jpg' },
+        // { src: 'images/productImgs/image-product-4.jpg' }
 
+        { src: props.state.images[1] },
+        { src: props.state.images[2]},
+        { src: props.state.images[3] },
+        //{ src: 'images/productImgs/image-product-4.jpg' }
     ];
 
     const prevSlide = () => {
-        setActiveImg(activeImg === 0 ? images.length - 1 : activeImg - 1);
+        setActiveImg(activeImg === 0 ? image.length - 1 : activeImg - 1);
     };
 
     const nextSlide = () => {
-        setActiveImg(activeImg === images.length - 1 ? 0 : activeImg + 1);
+        setActiveImg(activeImg === image.length - 1 ? 0 : activeImg + 1);
     };
 
 
-    function handleAddProduct() {
-        if (itemQuantity > 0) {
-            dispatch(addProduct(item))
-        }
-        console.log(props)
-    }
-
+    // function handleAddProduct() {
+    //     if (itemQuantity > 0) {
+    //         dispatch(addProduct(item))
+    //     }
+    //     console.log(props)
+    // }
+   console.log(props.state.images)
     return (
+        <>
+        <Navbar />
         <div className="">
             <div className="flex justify-between p-5 mt-8 space-y-3 flex-col lg:flex-row">
                 <div className="md:px-5 mr-auto">
 
-                    {images.map((image, index) => (
-                        <div className={index === activeImg ? "flex flex-row  relative  " : "hidden"} key={index}>
-                            <img className="rounded-lg   object-cover" src={image.src} alt="productImg" />
+                        <div className="flex flex-row relative ">
+                            <img className="rounded-lg   object-cover" src={props.state.images[0]} alt="productImg" />
                             <div className="md:hidden absolute top-1/2  w-full flex flex-row justify-between" >
                                 <svg onClick={prevSlide} className="ml-3   cursor-pointer" width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
                                 <svg onClick={nextSlide} className="mr-3 cursor-pointer " width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
                             </div>
                         </div>
 
-
-                    ))}
                     <div className="hidden w-full md:space-x-3 mt-4 md:justify-between md:flex md:flex-row">
 
-                        {images.map((image, index) => (
+                        {image.map((x, index) => (
                             <img
                                 key={index}
                                 onClick={() => setActiveImg(index)}
-                                className=" object-cover  mt-3  rounded-lg  w-24 h-24 lg:w-32 lg:h-32 hover:opacity-60" src={image.src} alt="productImg" />
+                                className=" object-cover  mt-3  rounded-lg  w-24 h-24 lg:w-32 lg:h-32 hover:opacity-60" src={x.src} alt="productImg" />
                         ))}
                     </div>
                 </div>
@@ -99,13 +103,14 @@ const Product = ({ props }) => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="text-black h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <button onClick={handleAddProduct} className="text-white w-48 text-xl ">Add to cart</button>
+                            <button  className="text-white w-48 text-xl ">Add to cart</button>
                         </div>
 
                     </div>
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

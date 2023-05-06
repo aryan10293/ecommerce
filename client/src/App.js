@@ -6,8 +6,10 @@ import Dashboard from './component/Dashboard';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import Home from './component/Home'
+import Product from './component/Product';
 function App() {
   const [user,setUser] = React.useState(null)
+  
   let userLogin = false
   useEffect(() => {
     const fetchData = async () => {
@@ -23,12 +25,33 @@ function App() {
   if(user !== null){
     userLogin = true
   }
+
+
+  // for testing 
+    const [product, setProduct] = React.useState(null)
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await fetch('https://dummyjson.com/products');
+          const data = await response.json();
+          setProduct([...data.products][0]);
+          //console.log(data.products[0].id === userWishlist)
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchData()
+    },[])
+  // for testing
   return (
     <>
       <Routes>
           <Route 
+          path="/product"
+          element={ true ? <Product state={product}/> : <Navigate  to='/login'/>} />
+          <Route 
           path="/dashboard"
-          element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/signup'/>} />
+          element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />
 
           <Route 
           path='/'
