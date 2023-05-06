@@ -4,8 +4,6 @@ import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToCart from './AddToCart'
-import handleAdd from './handleadd'
-import handleDelete from './handleDelete'
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
@@ -68,19 +66,8 @@ function Dashboard(props) {
     }
 
   }
-
-
-//console.log(wishList[1].id === undefined)
-
-
-
-
-
-
-
-
-    React.useEffect(() => {
-    console.log('wishlist updated:', wishList);
+React.useEffect(() => {
+   // console.log('wishlist updated:', wishList);
   }, [wishList]);
   return (
     <>

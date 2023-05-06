@@ -37,7 +37,7 @@ function AddToCart(props) {
     }
 
     React.useEffect(() => {
-         console.log('cart updated:', cart);
+   //      console.log('cart updated:', cart);
     }, [cart]);
   return (
     <>

@@ -1,5 +1,23 @@
 import React from 'react'
 function Navbar() {
+    const searchRef = React.useRef()
+    const [search, setSearch] = React.useState('')
+    const handleChange = (e) => {
+        setSearch(e.target.value)
+    }
+    const  handleClick = async (e) => {
+        const searchVal = searchRef.current.value
+        //console.log(searchVal)
+        setSearch('')
+        try {
+        const response = await fetch('https://dummyjson.com/products');
+        const data = await response.json();
+        let lol = [...data.products].filter(x => x.title === searchVal ? x : null);
+        lol.length === 1 ? console.log(lol[0]) : console.log('product not found')
+      } catch (error) {
+        console.error(error);
+      }
+    }
   return (
         <header className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
@@ -11,11 +29,11 @@ function Navbar() {
                 <span className="absolute left-4 top-3 text-lg text-gray-400">
                     <i className="fa-solid fa-magnifying-glass"></i>
                 </span>
-                <input type="text" name="search" id="search"
+                <input  ref={searchRef} onChange={handleChange} value={search} type="text" name="search" id="search"
                     className="w-full border border-primary border-r-0 pl-12 py-3 pr-3 rounded-l-md focus:outline-none"
                     placeholder="search"/>
                 <button
-                    className="bg-primary border border-primary text-black px-8 rounded-r-md hover:bg-transparent hover:text-primary transition">Search</button>
+                   onClick={handleClick} className="bg-primary border border-primary text-black px-8 rounded-r-md hover:bg-transparent hover:text-primary transition">Search</button>
             </div>
 
             <div className="flex items-center space-x-4">
