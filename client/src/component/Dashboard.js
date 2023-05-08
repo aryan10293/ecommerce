@@ -1,5 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -84,13 +85,13 @@ React.useEffect(() => {
                           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                               <div className="group relative">
                                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                  <img src={item.images[3]} alt={item.description} className="h-full w-full object-cover object-center lg:h-full lg:w-full" />
+                                    <Link to={`/product/${item.title}`}><img src={item.images[3]} alt={item.description} className="h-full w-full object-cover object-center lg:h-full lg:w-full" /></Link>
                                 </div>
                                 <div className="mt-4 flex justify-between">
                                   <div>
                                     <h3 className="text-sm text-gray-700">
                                       <p>
-                                        <span aria-hidden="true" className="absolute inset-0"></span>
+                                        <Link to={`/product/${item.title}`}><span aria-hidden="true" className="absolute inset-0"></span></Link>
                                         <span>${item.price}</span>
                                       </p>
                                     </h3>

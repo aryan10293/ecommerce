@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 import Navbar from './Navbar'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 //import { useDispatch } from "react-redux";
 //import { addProduct } from "../redux/cartSlice"
 
@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 const Product = (props) => {
     const location = useLocation()
     const [activeImg, setActiveImg] = React.useState(0)
-
+    const {id} = useParams()
 
   //  const dispatch = useDispatch()
 
@@ -40,7 +40,9 @@ const Product = (props) => {
     //     }
     //     console.log(props)
     // }
-   console.log(location.state?.from.title)
+   //console.log(location.state?.from.title)
+   // make a get request to get the id pramert in the api
+   console.log(id)
     return (
         <>
         <Navbar />

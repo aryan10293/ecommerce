@@ -1,7 +1,7 @@
 import './App.css';
 import React, { useEffect } from 'react';
 import { Fragment } from 'react';
-import {Route, Routes, Navigate} from "react-router-dom"
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './component/Dashboard';
 import Login from './component/Login';
 import Signup from './component/Signup';
@@ -45,10 +45,10 @@ function App() {
   // for testing
   return (
     <>
-      <Routes>
+        <Routes>
           <Route 
-          path="/product"
-          element={ true ? <Product /> : <Navigate  to='/login'/>} />
+          path="/product/:id"
+          element={<Product />} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />
@@ -64,7 +64,7 @@ function App() {
           <Route 
           path='/signup'
           element={!userLogin ? <Signup /> : <Navigate to='/dashboard'/>} />
-      </Routes>
+        </Routes>
 
     </>
   );
