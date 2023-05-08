@@ -1,5 +1,7 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 function Navbar() {
+    const navigate = useNavigate();
     const searchRef = React.useRef()
     const [search, setSearch] = React.useState('')
     const handleChange = (e) => {
@@ -12,8 +14,13 @@ function Navbar() {
         try {
         const response = await fetch('https://dummyjson.com/products');
         const data = await response.json();
-        let lol = [...data.products].filter(x => x.title === searchVal ? x : null);
-        lol.length === 1 ? console.log(lol[0]) : console.log('product not found')
+        const foundProduct = data.products.find(product => product.title === searchVal);
+        if (foundProduct) {
+            navigate('/product', { state: { from: foundProduct } });
+        } else {
+            console.log('Product not found');
+        }
+        
       } catch (error) {
         console.error(error);
       }

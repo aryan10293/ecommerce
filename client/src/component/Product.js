@@ -1,19 +1,14 @@
 import React from 'react'
 import { Fragment } from 'react'
 import Navbar from './Navbar'
+import { useLocation } from 'react-router-dom';
 //import { useDispatch } from "react-redux";
 //import { addProduct } from "../redux/cartSlice"
 
 
 const Product = (props) => {
-    const product = props.state
+    const location = useLocation()
     const [activeImg, setActiveImg] = React.useState(0)
-    const [itemQuantity, setItemQuantity] = React.useState(0)
-    const [item, setItem] = React.useState({
-        productName: "Fall Limited Edition Sneakers",
-        quantity: itemQuantity,
-        price: 150
-    })
 
 
   //  const dispatch = useDispatch()
@@ -24,9 +19,9 @@ const Product = (props) => {
         // { src: 'images/productImgs/image-product-3.jpg' },
         // { src: 'images/productImgs/image-product-4.jpg' }
 
-        { src: props.state.images[1] },
-        { src: props.state.images[2]},
-        { src: props.state.images[3] },
+        { src: location.state?.from.images[1] },
+        { src: location.state?.from.images[2]},
+        { src: location.state?.from.images[3] },
         //{ src: 'images/productImgs/image-product-4.jpg' }
     ];
 
@@ -45,7 +40,7 @@ const Product = (props) => {
     //     }
     //     console.log(props)
     // }
-   console.log(props.state.images)
+   console.log(location.state?.from.title)
     return (
         <>
         <Navbar />
@@ -54,7 +49,7 @@ const Product = (props) => {
                 <div className="md:px-5 mr-auto">
 
                         <div className="flex flex-row relative ">
-                            <img className="rounded-lg   object-cover" src={props.state.images[0]} alt="productImg" />
+                            <img className="rounded-lg   object-cover" src={location.state?.from.images[0]} alt="productImg" />
                             <div className="md:hidden absolute top-1/2  w-full flex flex-row justify-between" >
                                 <svg onClick={prevSlide} className="ml-3   cursor-pointer" width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
                                 <svg onClick={nextSlide} className="mr-3 cursor-pointer " width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
@@ -75,35 +70,21 @@ const Product = (props) => {
                 <div className="md:ml-24 space-y-6 md:space-y-12">
 
                     <div className="md:mt-24 space-y-3">
-                        <h3 className="font-bold text-orange-400">SNEAKER COMPANY</h3>
-                        <h1 className="text-4xl md:text-6xl font-bold">Fall Limited Edition Sneakers</h1>
-                        <p className="md:mt-16 text-gray-500">These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer role. they'll withstand everything the weather can offer</p>
+                        <h3 className="font-bold text-black-400">{location.state?.from.brand}</h3>
+                        <h1 className="text-4xl md:text-6xl font-bold">{location.state?.from.title}</h1>
+                        <p className="md:mt-16 text-gray-500">{location.state?.from.description}</p>
                     </div>
                     <div className="flex md:mt-12 flex-row md:flex-col md:justify-start md:items-start justify-between items-center">
                         <div className="flex flex-row items-center space-x-5">
-
-                            <span className="text-5xl font-bold">$125</span>
-                            <div className="h-fit bg-orange-100 py-1 px-2">
-                                <span className="font-bold text-orange-400">-50%</span>
-                            </div>
+                            <span className="text-5xl font-bold">${location.state?.from.price}</span>
                         </div>
-                        <span className="text-gray-300 font-bold line-through">$250.00</span>
                     </div>
                     <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-3 items-center mt-12 ">
-                        <div onClick={() => setItem({ ...item, quantity: itemQuantity })} className=" flex w-48 p-3  md:p-2  bg-blue-50  rounded-lg items-center justify-between  flex-row ">
-                            <button onClick={() => itemQuantity > 0 && setItemQuantity(itemQuantity - 1)} className="text-orange-500 cursor-pointer text-3xl font-bold">
-                                -
-                            </button>
-                            <span className="font-bold text-xl">{itemQuantity}</span>
-                            <button onClick={() => setItemQuantity(itemQuantity + 1)} className="text-orange-500  cursor-pointer text-3xl font-bold">
-                                +
-                            </button>
-                        </div>
-                        <div className="flex cursor-pointer shadow-xl md:w-64 rounded-md flex-row p-3 items-center justify-center space-x-3 bg-orange-500 hover:bg-orange-600">
+                        <div className="flex cursor-pointer shadow-xl md:w-64 rounded-md flex-row p-3 items-center justify-center space-x-3 bg-black-500 hover:bg-black-600">
                             <svg xmlns="http://www.w3.org/2000/svg" className="text-black h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <button  className="text-white w-48 text-xl ">Add to cart</button>
+                            <button  className="text-green-500 w-48 text-xl ">Add to cart</button>
                         </div>
 
                     </div>

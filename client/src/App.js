@@ -34,7 +34,7 @@ function App() {
         try {
           const response = await fetch('https://dummyjson.com/products');
           const data = await response.json();
-          setProduct([...data.products][0]);
+          setProduct([...data.products][1]);
           //console.log(data.products[0].id === userWishlist)
         } catch (error) {
           console.error(error);
@@ -48,7 +48,7 @@ function App() {
       <Routes>
           <Route 
           path="/product"
-          element={ true ? <Product state={product}/> : <Navigate  to='/login'/>} />
+          element={ true ? <Product /> : <Navigate  to='/login'/>} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />
