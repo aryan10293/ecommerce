@@ -11,20 +11,9 @@ function Navbar() {
     const  handleClick = async (e) => {
         const searchVal = searchRef.current.value
         //console.log(searchVal)
+        navigate(`/product/${searchVal}`);
         setSearch('')
-        try {
-        const response = await fetch('https://dummyjson.com/products');
-        const data = await response.json();
-        const foundProduct = data.products.find(product => product.title === searchVal);
-        if (foundProduct) {
-            navigate(`/product/${searchVal}`, { state: { from: foundProduct } });
-        } else {
-            console.log('Product not found');
-        }
-        
-      } catch (error) {
-        console.error(error);
-      }
+
     }
   return (
         <header className="py-4 shadow-sm bg-white">

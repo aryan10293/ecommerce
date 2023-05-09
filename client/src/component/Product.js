@@ -1,17 +1,44 @@
 import React from 'react'
 import { Fragment } from 'react'
 import Navbar from './Navbar'
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+
 //import { useDispatch } from "react-redux";
 //import { addProduct } from "../redux/cartSlice"
 
 
-const Product = (props) => {
-    const location = useLocation()
+const Product =  () => {
     const [activeImg, setActiveImg] = React.useState(0)
+    const [images,setImages] = React.useState([])
+    const [data, setData] = React.useState([])
     const {id} = useParams()
-
   //  const dispatch = useDispatch()
+    React.useEffect(() => {
+        async function fetchData(){
+            try {
+                const response = await fetch('https://dummyjson.com/products');
+                const data = await response.json();
+                const foundProduct = data.products.find(product => product.title === id);
+                if (foundProduct) {
+                    setImages(foundProduct.images)
+                    setData(foundProduct)
+                } else {
+                    console.log('Product not found');
+                }  
+            } catch (error) {
+                console.log(error)
+            }
+            
+            }
+        fetchData()
+    }, [id])
+
+
+
+
+
+
+
 
     const image = [
         // { src: 'images/productImgs/image-product-1.jpg' },
@@ -19,19 +46,11 @@ const Product = (props) => {
         // { src: 'images/productImgs/image-product-3.jpg' },
         // { src: 'images/productImgs/image-product-4.jpg' }
 
-        { src: location.state?.from.images[1] },
-        { src: location.state?.from.images[2]},
-        { src: location.state?.from.images[3] },
+       { src: images[1]},
+        { src: images[2]},
+        { src: images[3]},
         //{ src: 'images/productImgs/image-product-4.jpg' }
     ];
-
-    const prevSlide = () => {
-        setActiveImg(activeImg === 0 ? image.length - 1 : activeImg - 1);
-    };
-
-    const nextSlide = () => {
-        setActiveImg(activeImg === image.length - 1 ? 0 : activeImg + 1);
-    };
 
 
     // function handleAddProduct() {
@@ -42,7 +61,7 @@ const Product = (props) => {
     // }
    //console.log(location.state?.from.title)
    // make a get request to get the id pramert in the api
-   console.log(id)
+   console.log(images)
     return (
         <>
         <Navbar />
@@ -51,10 +70,8 @@ const Product = (props) => {
                 <div className="md:px-5 mr-auto">
 
                         <div className="flex flex-row relative ">
-                            <img className="rounded-lg   object-cover" src={location.state?.from.images[0]} alt="productImg" />
+                            <img className="rounded-lg   object-cover" src={images[0]} alt="productImg" />
                             <div className="md:hidden absolute top-1/2  w-full flex flex-row justify-between" >
-                                <svg onClick={prevSlide} className="ml-3   cursor-pointer" width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
-                                <svg onClick={nextSlide} className="mr-3 cursor-pointer " width="15" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd" /></svg>
                             </div>
                         </div>
 
@@ -72,13 +89,13 @@ const Product = (props) => {
                 <div className="md:ml-24 space-y-6 md:space-y-12">
 
                     <div className="md:mt-24 space-y-3">
-                        <h3 className="font-bold text-black-400">{location.state?.from.brand}</h3>
-                        <h1 className="text-4xl md:text-6xl font-bold">{location.state?.from.title}</h1>
-                        <p className="md:mt-16 text-gray-500">{location.state?.from.description}</p>
+                        <h3 className="font-bold text-black-400">{data.brand}</h3>
+                        <h1 className="text-4xl md:text-6xl font-bold">{data.title}</h1>
+                        <p className="md:mt-16 text-gray-500">{data.description}</p>
                     </div>
                     <div className="flex md:mt-12 flex-row md:flex-col md:justify-start md:items-start justify-between items-center">
                         <div className="flex flex-row items-center space-x-5">
-                            <span className="text-5xl font-bold">${location.state?.from.price}</span>
+                            <span className="text-5xl font-bold">${data.price}</span>
                         </div>
                     </div>
                     <div className="flex flex-col space-y-2 md:space-y-0 md:flex-row md:space-x-3 items-center mt-12 ">
