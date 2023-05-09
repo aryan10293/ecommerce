@@ -32,6 +32,7 @@ function Dashboard(props) {
     const brand = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML;
     const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
     const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
+    const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
     let productData
     let method;
    // console.log(e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML)
@@ -42,6 +43,7 @@ function Dashboard(props) {
           'imgSrc': imgSrc,
           'brand': brand,
           'item': item,
+          'img': img
     }
     wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {

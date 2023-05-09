@@ -7,6 +7,7 @@ import Login from './component/Login';
 import Signup from './component/Signup';
 import Home from './component/Home'
 import Product from './component/Product';
+import Wishlist from './component/Wishlist';
 function App() {
   const [user,setUser] = React.useState(null)
   
@@ -48,7 +49,10 @@ function App() {
         <Routes>
           <Route 
           path="/product/:id"
-          element={<Product />} />
+          element={userLogin ? <Product /> : <Navigate  to='/login'/>} />
+          <Route 
+          path="/wishlist"
+          element={userLogin ? <Wishlist state={user} /> : <Navigate  to='/login'/>} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />
