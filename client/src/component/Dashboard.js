@@ -27,24 +27,13 @@ function Dashboard(props) {
   }, []);
 
   const handleClick = async(e) => {
-    const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
-    const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
-    const brand = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML;
-    const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
     const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
-    const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
-    let productData
+    const productData = Object.fromEntries(
+         Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))
+      )
     let method;
-   // console.log(e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML)
     async function add(){
-           productData = {
-          'id': id,
-          'price': price,
-          'imgSrc': imgSrc,
-          'brand': brand,
-          'item': item,
-          'img': img
-    }
+    productData.id = id
     wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {
             const response = await fetch('/wish', {
@@ -59,8 +48,6 @@ function Dashboard(props) {
         }
  }
  add()
-    //addToWish(e)
-    //console.log(cool)
     if(method === 'PUT'){
       setWishlist([...wishList, productData])
     } else {
@@ -70,7 +57,6 @@ function Dashboard(props) {
 
   }
 React.useEffect(() => {
-   // console.log('wishlist updated:', wishList);
   }, [wishList]);
   return (
     <>
@@ -82,7 +68,7 @@ React.useEffect(() => {
             {data.map((item, i) => {
                    return (
                      <>
-                        <li key={item.id} data-id={item.id}>
+                        <li key={item.id} data-item={item.title} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.images[3]}>
                           <div className="bg-white">
                           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                               <div className="group relative">
@@ -121,5 +107,4 @@ React.useEffect(() => {
   )
 }
 
-export default Dashboard
-// <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button>  
+export default Dashboard  

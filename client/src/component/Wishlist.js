@@ -7,20 +7,26 @@ function Wishlist(props) {
 
     React.useEffect(() => {
     async function fetchData(){
-        try {
-        const response = await fetch('http://localhost:2011/wish', {
-            method: 'GET',
-            credentials: 'include'
-        });
-        const data = await response.json();
-        setWishlist(data)
-        } catch (error) {
-        console.error(error);
+            try {
+            const response = await fetch('http://localhost:2011/wish', {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setWishlist(data)
+            } catch (error) {
+            console.error(error);
+            }
         }
+        fetchData()
+    }, [])
+
+    const handleClick = (e) => {
+        const product = Object.fromEntries(
+            Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
+        )
+        console.log(product)
     }
-    fetchData()
-}, [])
-console.log(wishlist)
   return (
     <>
       <Navbar />
@@ -44,9 +50,9 @@ console.log(wishlist)
                     <tbody className="w-full text-left">
                     {wishlist.map(item => {
                         return (
-                           <tr className="border-gray-200 border-b  ">
+                           <tr className="border-gray-200 border-b  " data-item={item.item} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.img} >
                             <th>
-                                <img className="my-10 pl-4 lg:pl-10 2xl:pl-20" src={item.img} alt="shoe" />
+                                <img className="my-10 pl-4 lg:pl-10 2xl:pl-20" src={item.img} alt={`${item.item}`} />
                             </th>
                             <th className="mt-10 text-base font-medium leading-4 text-gray-600 pl-6 lg:pl-20 2xl:pl-52">
                                 <p className=" text-base leading-4 text-gray-800">{item.item}</p>
@@ -62,7 +68,12 @@ console.log(wishlist)
                             <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">
                                 <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800">
                                     <p>Remove Item</p>
-                                </button>
+                                </button>                               
+                            </th>
+                            <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">
+                                <button onClick={handleClick} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-base leading-none text-green-600 hover:text-green-800">
+                                    Add To Cart
+                                </button>                             
                             </th>
                         </tr>
                         )
@@ -76,120 +87,45 @@ console.log(wishlist)
                 <div className="sm:hidden flex flex-col justify-start items-start ">
                     <div className="px-4 lg:px-10 2xl:px-20 flex flex-row justify-start items-end space-x-4">
                         <p className="text-4xl font-semibold leading-9 text-gray-800">Favourites</p>
-                        <p className="text-base leading-4 text-gray-600 pb-1">(12 Items)</p>
+                        <p className="text-base leading-4 text-gray-600 pb-1">({wishlist.length})</p>
                     </div>
-                    <div className="border-gray-200 border-b pb-10">
-                        <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
-                            <div>
-                                <img src="https://i.ibb.co/bHgJDpd/imani-bahati-Lx-Vx-PA1-LOVM-unsplash-2.png" alt="shoe" />
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <p className="w-36 text-base leading-6 text-gray-800">Jet black sportsmen shoes</p>
-                            </div>
-                            <div>
-                                <p className="text-base font-semibold leading-4 text-gray-800">$90</p>
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <a href="javascript:void(0)" className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800">
-                                    {" "}
-                                    View details
-                                </a>
-                            </div>
-                            <div>
-                                <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-red-600 hover:text-red-800">
-                                    <p>Remove Item</p>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="border-gray-200 border-b pb-10">
-                        <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
-                            <div>
-                                <img src="https://i.ibb.co/6y62DnT/daniel-storek-JM-q-KEd1-GMI-unsplash-1-1.png" alt="shoes" />
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <p className="w-36 text-base leading-6 text-gray-800">Jet black sportsmen shoes</p>
-                            </div>
-                            <div>
-                                <p className="text-base font-semibold leading-4 text-gray-800">$90</p>
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <a href="javascript:void(0)" className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800">
-                                    {" "}
-                                    View details
-                                </a>
-                            </div>
-                            <div>
-                                <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-red-600 hover:text-red-800">
-                                    <p>Remove Item</p>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="border-gray-200 border-b pb-10">
-                        <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
-                            <div>
-                                <img src="https://i.ibb.co/LR5LyDw/charles-deluvio-1-nx1-QR5d-TE-unsplash-1-1.png" alt="glasses" />
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <p className="w-36 text-base leading-6 text-gray-800">Jet black sportsmen shoes</p>
-                            </div>
-                            <div>
-                                <p className="text-base font-semibold leading-4 text-gray-800">$90</p>
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <a href="javascript:void(0)" className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800">
-                                    {" "}
-                                    View details
-                                </a>
-                            </div>
-                            <div>
-                                <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-red-600 hover:text-red-800">
-                                    <p>Remove Item</p>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="border-gray-200 border-b pb-10">
-                        <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
-                            <div>
-                                <img src="https://i.ibb.co/XzvpLZz/rocknwool-8-Lsy75-Lq-GVc-unsplash-1-4.png" alt="girl" />
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <p className="w-36 text-base leading-6 text-gray-800">Jet black sportsmen shoes</p>
-                            </div>
-                            <div>
-                                <p className="text-base font-semibold leading-4 text-gray-800">$90</p>
-                            </div>
-                        </div>
-                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
-                            <div>
-                                <a href="javascript:void(0)" className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800">
-                                    {" "}
-                                    View details
-                                </a>
-                            </div>
-                            <div>
-                                <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-red-600 hover:text-red-800">
-                                    <p>Remove Item</p>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+                        {wishlist.map(item => {
+                            return (
+                                <div className="border-gray-200 border-b pb-10">
+                                        <div className="px-4 flex flex-col jusitfy-center items-start mt-10">
+                                            <div>
+                                                <img src={item.img} alt={item.item} />
+                                            </div>
+                                        </div>
+                                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
+                                            <div>
+                                                <p className="w-36 text-base leading-6 text-gray-800">{item.item}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-base font-semibold leading-4 text-gray-800">{item.price}</p>
+                                            </div>
+                                        </div>
+                                        <div className="px-4 mt-6 flex justify-between w-full flex jusitfy-center items-center">
+                                            <div>
+                                                <Link to={`/product/${item.item}`} className="hover:underline text-base font-medium leading-none focus:outline-none focus:underline  text-gray-800">
+                                                    {" "}
+                                                    View details
+                                                </Link>
+                                            </div>
+                                            <div>
+                                                <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-red-600 hover:text-red-800">
+                                                    <p>Remove Item</p>
+                                                </button>                                             
+                                            </div>
+                                            <div>
+                                                 <button className="focus:outline-none focus:ring-red-800 focus:ring-offset-2 focus:ring-2 text-base leading-none text-green-600 hover:text-red-800">
+                                                    Add To Cart
+                                                </button>                                              
+                                            </div>
+                                        </div>
+                                    </div>
+                            )
+                    })}
                 </div>
             </div>
             {/* Mobile Responsive End */}

@@ -15,7 +15,7 @@ function AddToCart(props) {
            productData = {
           'id': id,
           'price': price,
-          'imgSrc': imgSrc,
+          'img': imgSrc,
           'brand': brand,
           'item': item,
     }
