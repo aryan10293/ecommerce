@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 function Wishlist(props) {
     const [wishlist, setWishlist] = React.useState([])
-
     React.useEffect(() => {
     async function fetchData(){
             try {
@@ -21,11 +20,21 @@ function Wishlist(props) {
         fetchData()
     }, [])
 
-    const handleClick = (e) => {
+    const handleClick = async(e) => {
         const product = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
         )
-        console.log(product)
+        try {
+            const response = await fetch('/cart', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(product)
+                })
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
   return (
     <>

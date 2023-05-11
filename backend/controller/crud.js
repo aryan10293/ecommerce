@@ -47,5 +47,13 @@ module.exports = {
         } catch (error) {
             console.error(error)
         }
+    },
+    getCart: async (req,res) => {
+        try {
+           let cool =  await User.find(req.user)   
+           res.send(cool[0].cart)         
+        } catch (error) {
+            console.error(error)
+        }
     }
 }

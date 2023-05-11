@@ -8,6 +8,7 @@ import Signup from './component/Signup';
 import Home from './component/Home'
 import Product from './component/Product';
 import Wishlist from './component/Wishlist';
+import Cart from './component/Cart';
 function App() {
   const [user,setUser] = React.useState(null)
   
@@ -27,23 +28,6 @@ function App() {
     userLogin = true
   }
 
-
-  // for testing 
-    const [product, setProduct] = React.useState(null)
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await fetch('https://dummyjson.com/products');
-          const data = await response.json();
-          setProduct([...data.products][1]);
-          //console.log(data.products[0].id === userWishlist)
-        } catch (error) {
-          console.error(error);
-        }
-      }
-      fetchData()
-    },[])
-  // for testing
   return (
     <>
         <Routes>
@@ -52,7 +36,10 @@ function App() {
           element={userLogin ? <Product /> : <Navigate  to='/login'/>} />
           <Route 
           path="/wishlist"
-          element={userLogin ? <Wishlist state={user} /> : <Navigate  to='/login'/>} />
+          element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
+          <Route 
+          path="/cart"
+          element={userLogin ? <Cart state={user}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />

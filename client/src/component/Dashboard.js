@@ -8,9 +8,7 @@ import AddToCart from './AddToCart'
 function Dashboard(props) {
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
-  //const userWishlist = Number(props.state.wishlist[0].id) 
-  // const likes = [...document.querySelectorAll('.likes')]
-  // console.log(likes)
+  const [cart, setCart] = React.useState([...props.state.cart])
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -25,7 +23,37 @@ function Dashboard(props) {
 
     fetchData();
   }, []);
-
+  React.useEffect(() => {
+    async function fetchData(){
+      try {
+      const response = await fetch('http://localhost:2011/wish', {
+          method: 'GET',
+          credentials: 'include'
+      });
+      const data = await response.json();
+      setWishlist(data)
+      } catch (error) {
+      console.error(error);
+      }
+        
+        }
+        fetchData()
+    }, []);
+  React.useEffect(() => {
+    async function fetchData(){
+      try {
+      const response = await fetch('http://localhost:2011/cart', {
+          method: 'GET',
+          credentials: 'include'
+      });
+      const data = await response.json();
+      setCart(data)
+      } catch (error) {
+      console.error(error);
+      }
+    }
+      fetchData()
+  }, []);
   const handleClick = async(e) => {
     const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
     const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
@@ -35,7 +63,6 @@ function Dashboard(props) {
     const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
     let productData
     let method;
-   // console.log(e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML)
     async function add(){
            productData = {
           'id': id,
@@ -59,8 +86,6 @@ function Dashboard(props) {
         }
  }
  add()
-    //addToWish(e)
-    //console.log(cool)
     if(method === 'PUT'){
       setWishlist([...wishList, productData])
     } else {
@@ -69,24 +94,6 @@ function Dashboard(props) {
     }
 
   }
-React.useEffect(() => {
-  async function fetchData(){
-    try {
-    const response = await fetch('http://localhost:2011/wish', {
-        method: 'GET',
-        credentials: 'include'
-    });
-    const data = await response.json();
-    setWishlist(data)
-    } catch (error) {
-    console.error(error);
-    }
-      
-      }
-      fetchData()
-    //console.log('wishlist updated:', wishList);
-  }, []);
-  console.log('wishlist updated:', wishList)
   return (
     <>
         <Navbar />
@@ -119,10 +126,10 @@ React.useEffect(() => {
                               </div>
                               <div className="mr-auto">
                                 {
-                                  wishList.map(x => Number(x.id)).includes(item.id) ?
+                                  wishList.map(x => x.id).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
-                                  <AddToCart state={props.state}/>
+                                  <AddToCart state={props.state} data={cart}/>
                               </div>
                           </div>
                         </div>
