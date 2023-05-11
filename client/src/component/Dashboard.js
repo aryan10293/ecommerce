@@ -70,8 +70,23 @@ function Dashboard(props) {
 
   }
 React.useEffect(() => {
-   // console.log('wishlist updated:', wishList);
-  }, [wishList]);
+  async function fetchData(){
+    try {
+    const response = await fetch('http://localhost:2011/wish', {
+        method: 'GET',
+        credentials: 'include'
+    });
+    const data = await response.json();
+    setWishlist(data)
+    } catch (error) {
+    console.error(error);
+    }
+      
+      }
+      fetchData()
+    //console.log('wishlist updated:', wishList);
+  }, []);
+  console.log('wishlist updated:', wishList)
   return (
     <>
         <Navbar />
@@ -104,7 +119,7 @@ React.useEffect(() => {
                               </div>
                               <div className="mr-auto">
                                 {
-                                  wishList.map(x => x.id).includes(item.id) ?
+                                  wishList.map(x => Number(x.id)).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
                                   <AddToCart state={props.state}/>
