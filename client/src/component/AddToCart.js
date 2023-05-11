@@ -4,21 +4,22 @@ function AddToCart(props) {
     const [cart, setCart] = React.useState([...props.state.cart])
     const handleClick = (e) => {
         e.preventDefault()
-        const brand = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
-        const imgSrc = e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src || e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].alt
-        const price = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML
-        const item = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML
-        const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.dataset.id)
-
-    let productData
+        // const brand = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
+        // const imgSrc = e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src || e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].alt
+        // const price = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML
+        // const item = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML
+        // const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.dataset.id)
+    let productData = Object.fromEntries(
+         Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))
+      )
     async function add(){
-           productData = {
-          'id': id,
-          'price': price,
-          'img': imgSrc,
-          'brand': brand,
-          'item': item,
-    }
+    //        productData = {
+    //       'id': id,
+    //       'price': price,
+    //       'img': imgSrc,
+    //       'brand': brand,
+    //       'item': item,
+    // }
         try {
             const response = await fetch('/cart', {
                 method: 'PUT',
