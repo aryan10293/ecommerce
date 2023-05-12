@@ -8,6 +8,7 @@ import Signup from './component/Signup';
 import Home from './component/Home'
 import Product from './component/Product';
 import Wishlist from './component/Wishlist';
+import Checkout from './component/Checkout';
 import Cart from './component/Cart';
 function App() {
   const [user,setUser] = React.useState(null)
@@ -37,6 +38,9 @@ function App() {
           <Route 
           path="/wishlist"
           element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
+          <Route 
+          path="/checkout"
+          element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/cart"
           element={userLogin ? <Cart state={user}/> : <Navigate  to='/login'/>} />

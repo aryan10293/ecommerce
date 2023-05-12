@@ -40,6 +40,18 @@ module.exports = {
         console.error(error)
     }
     },
+    deleteCart: async (req,res) => {
+    try {
+        await User.findOneAndUpdate(
+            {_id: req.user.id},
+            {
+                $pull: { cart: req.body },
+            }
+        )            
+    } catch (error) {
+        console.error(error)
+    }
+    },
     getWishList: async (req,res) => {
         try {
            let cool =  await User.find(req.user)   
