@@ -41,6 +41,7 @@ module.exports = {
     }
     },
     deleteCart: async (req,res) => {
+        console.log('delete started')
     try {
         await User.findOneAndUpdate(
             {_id: req.user.id},

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 function AddToCart(props) {
-    const [cart, setCart] = React.useState([props.data])
+    const [cart, setCart] = React.useState([...props.data])
     const handleClick = (e) => {
       console.log(cart)
         e.preventDefault()
@@ -9,7 +9,7 @@ function AddToCart(props) {
         const imgSrc = e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src || e.target.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
         const price = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML
         const item = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML
-        const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.dataset.id)
+        const id = e.target.parentElement.parentElement.parentElement.parentElement.dataset.id
     let productData
     async function add(){
 

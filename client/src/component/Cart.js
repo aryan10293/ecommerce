@@ -4,22 +4,45 @@ import Navbar from "./Navbar";
 function Cart(props) {
 //const [show, setShow] = React.useState(false);
     const [cart,setCart] = React.useState([...props.state.cart])
-    console.log(cart)
     React.useEffect(() => {
-    async function fetchData(){
-      try {
-      const response = await fetch('http://localhost:2011/cart', {
-          method: 'GET',
-          credentials: 'include'
-      });
-      const data = await response.json();
-      setCart(data)
-      } catch (error) {
-      console.error(error);
-      }
-    }
+        async function fetchData(){
+            try {
+            const response = await fetch('http://localhost:2011/cart', {
+                method: 'GET',
+                credentials: 'include'
+            });
+            const data = await response.json();
+            setCart(data)
+            } catch (error) {
+            console.error(error);
+            }
+        }
       fetchData()
+      console.log('updated cart', cart)
   }, []);
+  const removeHandleCLick = async (e) => {
+            const product = {
+                item: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].innerHTML,
+                price:e.target.parentElement.nextElementSibling.innerHTML,
+                id: e.target.parentElement.parentElement.parentElement.dataset.id,
+                brand:e.target.parentElement.parentElement.parentElement.childNodes[0].innerHTML,
+                img:e.target.parentElement.parentElement.parentElement.previousElementSibling.childNodes[0].src
+            }
+            try {
+            const response = await fetch('/cart', {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(product)
+                })
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+      let newList = cart.filter(x => x.id !== product.id )
+      console.log(newList)
+      setCart(newList)
+  }
  return (
         <>
             <div>
@@ -38,18 +61,18 @@ function Cart(props) {
                                     <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Cart</p>
                                 {cart.map(item => {
                                     return (
-                                        <div className="md:flex items-center mt-14 py-8 border-t border-gray-200">
+                                        <div key={item.id} className="md:flex items-center mt-14 py-8 border-t border-gray-200">
                                         <div className="w-1/4">
                                             <img src={item.img} alt={item.item} className="w-full h-full object-center object-cover" />
                                         </div>
-                                        <div className="md:pl-3 md:w-3/4">
+                                        <div className="md:pl-3 md:w-3/4" data-item={item.item} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.img}>
                                             <p className="text-xs leading-3 text-gray-800 md:pt-0 pt-4">{item.brand}</p>
                                             <div className="flex items-center justify-between w-full pt-1">
                                                 <p className="text-base font-black leading-none text-gray-800">{item.item}</p>
                                             </div>
                                             <div className="flex items-center justify-between pt-5 pr-6">
                                                 <div className="flex itemms-center">
-                                                    <p  className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                    <p onClick={removeHandleCLick} className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
                                                 </div>
                                                 <p className="text-base font-black leading-none text-gray-800">{item.price}</p>
                                             </div>
