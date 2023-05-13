@@ -3,46 +3,55 @@ import { Fragment } from "react";
 import Navbar from "./Navbar";
 function Cart(props) {
 //const [show, setShow] = React.useState(false);
-    const [cart,setCart] = React.useState([...props.state.cart])
-    React.useEffect(() => {
-        async function fetchData(){
-            try {
-            const response = await fetch('http://localhost:2011/cart', {
-                method: 'GET',
-                credentials: 'include'
-            });
-            const data = await response.json();
-            setCart(data)
-            } catch (error) {
-            console.error(error);
-            }
-        }
-      fetchData()
-      console.log('updated cart', cart)
-  }, []);
-  const removeHandleCLick = async (e) => {
-            const product = {
-                item: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].innerHTML,
-                price:e.target.parentElement.nextElementSibling.innerHTML,
-                id: e.target.parentElement.parentElement.parentElement.dataset.id,
-                brand:e.target.parentElement.parentElement.parentElement.childNodes[0].innerHTML,
-                img:e.target.parentElement.parentElement.parentElement.previousElementSibling.childNodes[0].src
-            }
-            try {
-            const response = await fetch('/cart', {
-                method: 'DELETE',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(product)
-                })
-            const data = await response.json()
-            console.log(data)
-        } catch (error) {
-            console.log(error)
-        }
-      let newList = cart.filter(x => x.id !== product.id )
-      console.log(newList)
-      setCart(newList)
+    const [cart,setCart] = React.useState(props.cart)
+React.useEffect(() => {
+  fetchData();
+}, []);
+
+const fetchData = async () => {
+  try {
+    const response = await fetch('http://localhost:2011/cart', {
+      method: 'GET',
+      credentials: 'include',
+    });
+    const data = await response.json();
+    setCart(data);
+  } catch (error) {
+    console.error(error,'i');
   }
+};
+
+const removeHandleClick = async (e) => {
+  const product = {
+    
+    item: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].innerHTML,
+    price: e.target.parentElement.nextElementSibling.innerHTML,
+    id: e.target.parentElement.parentElement.parentElement.dataset.id,
+    brand: e.target.parentElement.parentElement.parentElement.childNodes[0].innerHTML,
+    img: e.target.parentElement.parentElement.parentElement.previousElementSibling.childNodes[0].src
+  };
+  const user = {
+    userId: props.state._id
+  }
+  //make logout button
+  console.log(product)
+  try {
+    await fetch('http://localhost:2011/deletecart', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({product, user})
+    });
+  } catch (error) {
+    console.log('FFQEQWERFQWWRGWERG')
+    console.error(error);
+  }
+  console.log('cool')
+  setCart(prevCart => prevCart.filter(x => x.id !== product.id));
+};
+
+  React.useEffect(() => {
+  console.log('updated cart', cart);
+}, [cart]);
  return (
         <>
             <div>
@@ -72,7 +81,7 @@ function Cart(props) {
                                             </div>
                                             <div className="flex items-center justify-between pt-5 pr-6">
                                                 <div className="flex itemms-center">
-                                                    <p onClick={removeHandleCLick} className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                                    <p onClick={removeHandleClick} className="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
                                                 </div>
                                                 <p className="text-base font-black leading-none text-gray-800">{item.price}</p>
                                             </div>
@@ -114,27 +123,28 @@ function Cart(props) {
                     </div>
                 
             </div>
-
-            <style>
-                {` /* width */
-                #scroll::-webkit-scrollbar {
-                    width: 1px;
-                }
-
-                /* Track */
-                #scroll::-webkit-scrollbar-track {
-                    background: #f1f1f1;
-                }
-
-                /* Handle */
-                #scroll::-webkit-scrollbar-thumb {
-                    background: rgb(133, 132, 132);
-                }
-`                }
-            </style>
         </>
     );
 }
 
 export default Cart;
 // onClick={removeHandleCLick}
+
+
+//             <style>
+//                 {` /* width */
+//                 #scroll::-webkit-scrollbar {
+//                     width: 1px;
+//                 }
+
+//                 /* Track */
+//                 #scroll::-webkit-scrollbar-track {
+//                     background: #f1f1f1;
+//                 }
+
+//                 /* Handle */
+//                 #scroll::-webkit-scrollbar-thumb {
+//                     background: rgb(133, 132, 132);
+//                 }
+// `                }
+ //           </style>

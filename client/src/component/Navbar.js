@@ -47,7 +47,10 @@ function Navbar() {
                     <div className="text-2xl">
                         <i className="fa-solid fa-bag-shopping"></i>
                     </div>
-                    <Link to='/cart'><div className="text-xs leading-3">Cart</div></Link>
+                    <Link to={{
+                        pathname:'/cart',
+                        state: {prop1: 'lol'}}}
+                    ><div className="text-xs leading-3">Cart</div></Link>
                     <div
                         className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>

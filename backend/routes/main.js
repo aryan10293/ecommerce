@@ -10,13 +10,21 @@ router.post('/createaccount', authController.postCreateAccount)
 router.post('/login', authController.postLogin)
 
 router.get("/logout", authController.logout)
-router.get("/idk", authController.checkUser)
+router.get("/idk", ensureAuth, authController.checkUser)
 router.get('/wish', crudController.getWishList)
 router.get('/cart', crudController.getCart)
 
 router.put('/wish', crudController.addWish)
 router.put('/cart', crudController.addCart)
 
-router.delete('/cart', crudController.deleteCart)
+
+router.options('/deletecart', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  res.sendStatus(204); // Send a successful response with status code 204 (No Content)
+})
+router.delete('/deletecart', crudController.whyWontItWork)
 router.delete('/wish', crudController.deleteWish)
 module.exports = router;

@@ -16,7 +16,7 @@ module.exports = {
         }
     },
         deleteWish: async (req,res) => {
-        console.log('delete has started ')
+        console.log('delete has started ',req.user)
         try {
             await User.findOneAndUpdate(
                 {_id: req.user.id},
@@ -40,18 +40,19 @@ module.exports = {
         console.error(error)
     }
     },
-    deleteCart: async (req,res) => {
-        console.log('delete started')
-    try {
-        await User.findOneAndUpdate(
-            {_id: req.user.id},
-            {
-                $pull: { cart: req.body },
-            }
-        )            
-    } catch (error) {
-        console.error(error)
-    }
+    whyWontItWork: async (req,res) => {
+        // console.log(req.body.product)
+        // console.log(req.body.user.userId)
+        try {
+            await User.findOneAndUpdate(
+                {_id: req.body.user.userId},
+                {
+                    $pull: { cart: req.body.product },
+                }
+            )            
+        } catch (error) {
+            console.error(error)
+        }
     },
     getWishList: async (req,res) => {
         try {

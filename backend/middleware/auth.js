@@ -1,9 +1,11 @@
 module.exports = {
     ensureAuth: function (req, res, next) {
+      console.log(req.isAuthenticated())
       if (req.isAuthenticated()) {
         return next();
       } else {
-        res.redirect("/");
+        console.log(req.isAuthenticated())
+        res.redirect("/deletecart");
       }
     },
     ensureGuest: function (req, res, next) {

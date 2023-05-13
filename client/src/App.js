@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Fragment } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './component/Dashboard';
@@ -12,9 +12,9 @@ import Checkout from './component/Checkout';
 import Cart from './component/Cart';
 function App() {
   const [user,setUser] = React.useState(null)
-  
+  const [cart,setCart] = React.useState([])
   let userLogin = false
-  useEffect(() => {
+  React.useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://localhost:2011/idk', {
           method: 'GET',
@@ -25,6 +25,21 @@ function App() {
     }
     fetchData()
   },[])
+    React.useEffect(() => {
+    async function fetchData(){
+      try {
+      const response = await fetch('http://localhost:2011/cart', {
+          method: 'GET',
+          credentials: 'include'
+      });
+      const data = await response.json();
+      setCart(data)
+      } catch (error) {
+      console.error(error);
+      }
+    }
+      fetchData()
+  }, []);
   if(user !== null){
     userLogin = true
   }
@@ -43,7 +58,7 @@ function App() {
           element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/cart"
-          element={userLogin ? <Cart state={user}/> : <Navigate  to='/login'/>} />
+          element={userLogin ? <Cart state={user} cart={cart}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />

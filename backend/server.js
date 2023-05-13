@@ -47,11 +47,11 @@ app.use(
   app.use(flash());
 
 
-  app.use(cors({
+app.use(cors({
   origin: 'http://localhost:3000',
-  methods: "GET,POST,PUT,DELETE",
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
-}))
+}));
   
   //Setup Routes For Which The Server Is Listening
    app.use("/", mainRoutes);
