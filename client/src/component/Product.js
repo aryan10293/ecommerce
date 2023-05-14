@@ -2,17 +2,10 @@ import React from 'react'
 import { Fragment } from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom';
-
-//import { useDispatch } from "react-redux";
-//import { addProduct } from "../redux/cartSlice"
-
-
-const Product =  () => {
-    const [activeImg, setActiveImg] = React.useState(0)
+const Product = () => {
     const [images,setImages] = React.useState([])
     const [data, setData] = React.useState([])
     const {id} = useParams()
-  //  const dispatch = useDispatch()
     React.useEffect(() => {
         async function fetchData(){
             try {
@@ -32,36 +25,31 @@ const Product =  () => {
             }
         fetchData()
     }, [id])
-
-
-
-
-
-
-
-
     const image = [
-        // { src: 'images/productImgs/image-product-1.jpg' },
-        // { src: 'images/productImgs/image-product-2.jpg' },
-        // { src: 'images/productImgs/image-product-3.jpg' },
-        // { src: 'images/productImgs/image-product-4.jpg' }
-
        { src: images[1]},
         { src: images[2]},
         { src: images[3]},
-        //{ src: 'images/productImgs/image-product-4.jpg' }
     ];
 
-
-    // function handleAddProduct() {
-    //     if (itemQuantity > 0) {
-    //         dispatch(addProduct(item))
-    //     }
-    //     console.log(props)
-    // }
-   //console.log(location.state?.from.title)
-   // make a get request to get the id pramert in the api
-   console.log(images)
+    const handleClick = async (e) => {
+        const productData = {
+            price: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].childNodes[0].innerHTML,
+            img: image[2].src,
+            brand: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[0].innerHTML,
+            item: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[1].innerHTML
+        }
+        try {
+            const response = await fetch('/cart', {
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(productData)
+                })
+            const data = await response.json()
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
     return (
         <>
         <Navbar />
@@ -80,7 +68,6 @@ const Product =  () => {
                         {image.map((x, index) => (
                             <img
                                 key={index}
-                                onClick={() => setActiveImg(index)}
                                 className=" object-cover  mt-3  rounded-lg  w-24 h-24 lg:w-32 lg:h-32 hover:opacity-60" src={x.src} alt="productImg" />
                         ))}
                     </div>
@@ -103,9 +90,8 @@ const Product =  () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="text-black h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                             </svg>
-                            <button  className="text-green-500 w-48 text-xl ">Add to cart</button>
+                            <button onClick={handleClick} className="text-green-500 w-48 text-xl ">Add to cart</button>
                         </div>
-
                     </div>
                 </div>
             </div>
