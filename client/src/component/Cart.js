@@ -1,5 +1,6 @@
 import  React from "react";
 import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
 //const [show, setShow] = React.useState(false);
@@ -112,9 +113,11 @@ const removeHandleClick = async (e) => {
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                                                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">${cart.reduce((a,b) => {return Number(b.price.substring(1)) + a}, 0) + 35 + 30}</p>
                                             </div>
-                                            <button  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
+                                        <Link to='/checkout'>
+                                             <button  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Checkout
-                                            </button>
+                                            </button>                                       
+                                        </Link>
                                         </div>
                                     </div>
                                 </div>

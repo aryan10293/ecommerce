@@ -1,5 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
+import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 function Checkout(props) {
     const [dropdown1, setDropdown1] = React.useState(false);
     const [dropdown2, setDropdown2] = React.useState(false);
@@ -29,6 +31,7 @@ function Checkout(props) {
   console.log(cart)
   return (
     <>
+    <Navbar />
       <div className="overflow-y-hidden">
           <div className="flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44 ">
               <div className="flex w-full sm:w-9/12 lg:w-full flex-col lg:flex-row justify-center items-center lg:space-x-10 2xl:space-x-36 space-y-12 lg:space-y-0">
@@ -37,9 +40,9 @@ function Checkout(props) {
                           <p className="text-3xl lg:text-4xl font-semibold leading-7 lg:leading-9 text-gray-800">Check out</p>
                       </div>
                       <div className="mt-2">
-                          <a href="javascript:void(0)" className="text-base leading-4 underline  hover:text-gray-800 text-gray-600">
+                          <Link to="/cart" className="text-base leading-4 underline  hover:text-gray-800 text-gray-600">
                               Back to my bag
-                          </a>
+                          </Link>
                       </div>
                       <div className="mt-12">
                           <p className="text-xl font-semibold leading-5 text-gray-800">Shipping Details</p>
