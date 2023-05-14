@@ -44,15 +44,22 @@ module.exports = {
         // console.log(req.body.product)
         // console.log(req.body.user.userId)
         try {
-            await User.findOneAndUpdate(
+            const updateUser = await User.findOneAndUpdate(
                 {_id: req.body.user.userId},
-                {
-                    $pull: { cart: req.body.product },
-                }
-            )            
-        } catch (error) {
-            console.error(error)
+                {$pull: { cart: req.body.product }},
+                {new:true}
+            )   
+            
+        if (!updateUser) {
+            return res.status(404).json({ error: 'User not found' });
         }
+
+        return res.status(200).json(updateUser.cart);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
+
     },
     getWishList: async (req,res) => {
         try {
