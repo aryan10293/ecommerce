@@ -54,7 +54,7 @@ function App() {
           path="/wishlist"
           element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
           <Route 
-          path="/checkout"
+          path="/checkout/:oid/:tid"
           element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/cart"

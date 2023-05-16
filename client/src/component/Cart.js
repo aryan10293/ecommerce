@@ -3,30 +3,35 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
-      const user = {
-    userId: props.state._id
-  }
-//const [show, setShow] = React.useState(false);
     const [cart,setCart] = React.useState(props.cart)
-React.useEffect(() => {
-  fetchData();
-}, []);
-
-const fetchData = async () => {
-  try {
-    const response = await fetch('http://localhost:2011/cart', {
-      method: 'GET',
-      credentials: 'include',
-    });
-    const data = await response.json();
-    setCart(data);
-  } catch (error) {
-    console.error(error,'i');
+    const user = {
+        userId: props.state._id
   }
-};
+    const randomNumber = Math.floor(Math.random() * 10000000000000000) + 1;
+    const randomSmallNumber = Math.floor(Math.random() * 10000000) + 1
+    const number = {
+        num1: randomNumber,
+        num2: randomSmallNumber
+    }
+    React.useEffect(() => {
+    fetchData();
+    }, []);
 
-const removeHandleClick = async (e) => {
-  const product = {
+    const fetchData = async () => {
+    try {
+        const response = await fetch('http://localhost:2011/cart', {
+        method: 'GET',
+        credentials: 'include',
+        });
+        const data = await response.json();
+        setCart(data);
+    } catch (error) {
+        console.error(error,'i');
+    }
+    };
+
+    const removeHandleClick = async (e) => {
+    const product = {
     
     item: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].innerHTML,
     price: e.target.parentElement.nextElementSibling.innerHTML,
@@ -55,7 +60,7 @@ const handleOrderClick = async (e) => {
         await fetch('http://localhost:2011/confirmorder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({cart, user})
+        body: JSON.stringify({cart, user, randomNumber, randomSmallNumber})
         });
     } catch (error) {
         console.error(error);
@@ -124,7 +129,7 @@ const handleOrderClick = async (e) => {
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                                                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">${cart.reduce((a,b) => {return Number(b.price.substring(1)) + a}, 0) + 35 + 30}</p>
                                             </div>
-                                        <Link to='/checkout' onClick={handleOrderClick}>
+                                        <Link to={`/checkout/${randomSmallNumber}/${randomNumber}`} onClick={handleOrderClick}>
                                              <button  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Checkout
                                             </button>                                       

@@ -1,12 +1,13 @@
 import React from 'react'
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 function Checkout(props) {
-    const randomNumber = Math.floor(Math.random() * 10000000000000000) + 1;
-    const randomSmallNumber = Math.floor(Math.random() * 10000000) + 1;
-    console.log(randomNumber);
-
+  const location = useLocation();
+  const numbers = location.pathname.split('/').slice(2);
+  const order = numbers[0]; 
+  const tracking = numbers[1]
+  console.log()
     const [cart,setCart] = React.useState([...props.state.cart])
     React.useEffect(() => {
     async function fetchData(){
@@ -32,11 +33,11 @@ function Checkout(props) {
             <div class="max-w-xl">
             <h1 class="text-base font-medium text-indigo-600">Thank you!</h1>
             <p class="mt-2 text-4xl font-bold tracking-tight">It's on the way!</p>
-            <p class="mt-2 text-base text-gray-500">Your order #{randomSmallNumber} has shipped and will be with you soon.</p>
+            <p class="mt-2 text-base text-gray-500">Your order #{order} has shipped and will be with you soon.</p>
 
             <dl class="mt-12 text-sm font-medium">
                 <dt class="text-gray-900">Tracking number</dt>
-                <dd class="mt-2 text-indigo-600">{randomNumber}</dd>
+                <dd class="mt-2 text-indigo-600">{tracking}</dd>
             </dl>
             </div>
 
