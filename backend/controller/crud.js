@@ -1,5 +1,5 @@
 const User = require("../model/user");
-
+const nodemailer = require("nodemailer");
 
 module.exports = {
     addWish: async (req,res) => {
@@ -75,6 +75,25 @@ module.exports = {
            res.send(cool[0].cart)         
         } catch (error) {
             console.error(error)
+        }
+    },
+    confirmOrder: async (req,res) => {
+        console.log(req.body)
+       try {
+            const updateUser = await User.findOneAndUpdate(
+                {_id: req.body.user.userId},
+                {$push: { orderHistory: [req.body.cart]}},
+                {new:true}
+            )   
+            
+        if (!updateUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        return res.status(200).json(updateUser.orderHistory);
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
     }
 }

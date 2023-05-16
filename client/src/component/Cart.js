@@ -3,6 +3,9 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
+      const user = {
+    userId: props.state._id
+  }
 //const [show, setShow] = React.useState(false);
     const [cart,setCart] = React.useState(props.cart)
 React.useEffect(() => {
@@ -31,9 +34,6 @@ const removeHandleClick = async (e) => {
     brand: e.target.parentElement.parentElement.parentElement.childNodes[0].innerHTML,
     img: e.target.parentElement.parentElement.parentElement.previousElementSibling.childNodes[0].src
   };
-  const user = {
-    userId: props.state._id
-  }
   //make logout button
   console.log(product)
   try {
@@ -50,6 +50,17 @@ const removeHandleClick = async (e) => {
   setCart(prevCart => prevCart.filter(x => x.id !== product.id));
 };
 
+const handleOrderClick = async (e) => {
+    try {
+        await fetch('http://localhost:2011/confirmorder', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({cart, user})
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
   React.useEffect(() => {
   console.log('updated cart', cart);
 }, [cart]);
@@ -113,7 +124,7 @@ const removeHandleClick = async (e) => {
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                                                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">${cart.reduce((a,b) => {return Number(b.price.substring(1)) + a}, 0) + 35 + 30}</p>
                                             </div>
-                                        <Link to='/checkout'>
+                                        <Link to='/checkout' onClick={handleOrderClick}>
                                              <button  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Checkout
                                             </button>                                       

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const authController = require("../controller/auth")
 const crudController = require("../controller/crud")
+const nodemailer = require("nodemailer");
 const passport = require('passport')
 const cors = require('cors')
 const { ensureAuth, ensureGuest } = require("../middleware/auth")
@@ -17,7 +18,7 @@ router.get('/cart', crudController.getCart)
 router.put('/wish', crudController.addWish)
 router.put('/cart', crudController.addCart)
 
-
+router.post('/confirmorder', crudController.confirmOrder)
 router.options('/deletecart', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'DELETE');
