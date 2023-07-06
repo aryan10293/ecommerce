@@ -39,7 +39,7 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-        const reg = await fetch('http://localhost:2011/createaccount',{
+        const reg = await fetch('https://the-random-shop.onrender.com/createaccount',{
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(newUser),

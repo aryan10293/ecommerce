@@ -26,7 +26,7 @@ function Dashboard(props) {
   React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('http://localhost:2011/wish', {
+      const response = await fetch('https://the-random-shop.onrender.com/wish', {
           method: 'GET',
           credentials: 'include'
       });
@@ -42,7 +42,7 @@ function Dashboard(props) {
   React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('http://localhost:2011/cart', {
+      const response = await fetch('https://the-random-shop.onrender.com/cart', {
           method: 'GET',
           credentials: 'include'
       });
@@ -74,7 +74,7 @@ function Dashboard(props) {
     }
     wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {
-            const response = await fetch('/wish', {
+            const response = await fetch('https://the-random-shop.onrender.com/wish', {
                 method: method,
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)

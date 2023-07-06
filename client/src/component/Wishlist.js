@@ -7,7 +7,7 @@ function Wishlist(props) {
     React.useEffect(() => {
     async function fetchData(){
             try {
-            const response = await fetch('http://localhost:2011/wish', {
+            const response = await fetch('https://the-random-shop.onrender.com/wish', {
                 method: 'GET',
                 credentials: 'include'
             });

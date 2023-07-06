@@ -1,6 +1,6 @@
 const checkUser = async () => {
     try {
-    const response = await fetch('http://localhost:2011/idk', {
+    const response = await fetch('https://the-random-shop.onrender.com/idk', {
         method: 'GET',
         credentials: 'include'
     });

@@ -8,7 +8,7 @@ export default  function addToWish(e){
    // console.log(e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML)
     async function add(){
         try {
-            const response = await fetch('/wish', {
+            const response = await fetch('https://the-random-shop.onrender.com/wish', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({

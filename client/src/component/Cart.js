@@ -19,7 +19,7 @@ function Cart(props) {
 
     const fetchData = async () => {
     try {
-        const response = await fetch('http://localhost:2011/cart', {
+        const response = await fetch('https://the-random-shop.onrender.com/cart', {
         method: 'GET',
         credentials: 'include',
         });
@@ -42,7 +42,7 @@ function Cart(props) {
   //make logout button
   console.log(product)
   try {
-    await fetch('http://localhost:2011/deletecart', {
+    await fetch('https://the-random-shop.onrender.com/deletecart', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({product, user})
@@ -57,7 +57,7 @@ function Cart(props) {
 
 const handleOrderClick = async (e) => {
     try {
-        await fetch('http://localhost:2011/confirmorder', {
+        await fetch('https://the-random-shop.onrender.com/confirmorder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({cart, user, randomNumber, randomSmallNumber})

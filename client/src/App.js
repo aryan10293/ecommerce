@@ -16,7 +16,7 @@ function App() {
   let userLogin = false
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:2011/idk', {
+      const response = await fetch('https://the-random-shop.onrender.com/idk', {
           method: 'GET',
           credentials: 'include'
       })
@@ -28,7 +28,7 @@ function App() {
     React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('http://localhost:2011/cart', {
+      const response = await fetch('https://the-random-shop.onrender.com/cart', {
           method: 'GET',
           credentials: 'include'
       });

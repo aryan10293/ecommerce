@@ -12,7 +12,7 @@ function Checkout(props) {
     React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('http://localhost:2011/cart', {
+      const response = await fetch('https://the-random-shop.onrender.com/cart', {
           method: 'GET',
           credentials: 'include'
       });

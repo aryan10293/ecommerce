@@ -22,7 +22,7 @@ function AddToCart(props) {
     }
     console.log(productData)
         try {
-            const response = await fetch('/cart', {
+            const response = await fetch('https://the-random-shop.onrender.com/cart', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)
