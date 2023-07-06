@@ -25,7 +25,7 @@ function Wishlist(props) {
             Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
         )
         try {
-            const response = await fetch('/cart', {
+            const response = await fetch('https://the-random-shop.onrender.com/cart', {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(product)
