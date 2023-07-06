@@ -117,6 +117,7 @@ module.exports = {
         });
       },
       checkUser:  async (req,res) => {
+        conosle.log(req.user)
         res.send( req.user || null )
     }
     
