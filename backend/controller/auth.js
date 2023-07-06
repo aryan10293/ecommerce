@@ -117,7 +117,7 @@ module.exports = {
         });
       },
       checkUser:  async (req,res) => {
-        const lol = await User.find()
-        res.send( req.user )
+        res.send( req.user || null )
     }
+    
 }
