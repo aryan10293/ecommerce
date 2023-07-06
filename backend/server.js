@@ -1,15 +1,15 @@
-import express, { urlencoded, json } from "express";
+const express = require("express");
 const app = express();
-import { connection } from "mongoose";
-import passport, { initialize, session as _session } from "passport";
-import session from "express-session";
+const mongoose = require("mongoose");
+const passport = require("passport");
+const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-import flash from "express-flash";
-import logger from "morgan";
-import connectDB from "./config/database";
-import mainRoutes from "./routes/main";
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
+const flash = require("express-flash");
+const logger = require("morgan");
+const connectDB = require("./config/database");
+const mainRoutes = require("./routes/main");
+const cors = require('cors')
+const cookieParser = require('cookie-parser')
 //const tweetRoutes = require("./routes/tweet");
 
 //Use .env file in config folder
@@ -23,8 +23,8 @@ connectDB();
 
 
 //Body Parsing
-app.use(urlencoded({ extended: true }));
-app.use(json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 //Logging
 app.use(logger("dev"));
@@ -35,13 +35,13 @@ app.use(
       secret: "keyboard cat",
       resave: false,
       saveUninitialized: false,
-      store: new MongoStore({ mongooseConnection: connection }),
+      store: new MongoStore({ mongooseConnection: mongoose.connection }),
     })
   );
   app.use(cookieParser("keyboard cat"))
   // Passport middleware
-  app.use(initialize());
-  app.use(_session());
+  app.use(passport.initialize());
+  app.use(passport.session());
   require("./config/passport")(passport);
   //Use flash messages for errors, info, ect...
   app.use(flash());
