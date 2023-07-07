@@ -15,7 +15,7 @@ router.get("/idk", authController.checkUser)
 router.get('/wish/:id', crudController.getWishList)
 router.get('/cart', crudController.getCart)
 
-router.put('/wish', crudController.addWish)
+router.put('/wish/:id', crudController.addWish)
 router.put('/cart', crudController.addCart)
 
 router.post('/confirmorder', crudController.confirmOrder)
@@ -27,5 +27,5 @@ router.options('/deletecart', (req, res) => {
   res.sendStatus(204); // Send a successful response with status code 204 (No Content)
 })
 router.delete('/deletecart', crudController.whyWontItWork)
-router.delete('/wish', crudController.deleteWish)
+router.delete('/wish/:id', crudController.deleteWish)
 module.exports = router;

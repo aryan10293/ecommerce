@@ -3,10 +3,10 @@ const nodemailer = require("nodemailer");
 
 module.exports = {
     addWish: async (req,res) => {
-        console.log(req.body)
+        console.log(req.params.id)
         try {
             await User.findOneAndUpdate(
-                {_id: req.user.id},
+                {_id: req.params.id},
                 {
                     $push: { wishlist: req.body },
                 }
@@ -16,10 +16,10 @@ module.exports = {
         }
     },
         deleteWish: async (req,res) => {
-        console.log('delete has started ',req.user)
+        console.log('delete has started ',req.params.id)
         try {
             await User.findOneAndUpdate(
-                {_id: req.user.id},
+                {_id: req.params.id},
                 {
                     $pull: { wishlist: req.body },
                 }
