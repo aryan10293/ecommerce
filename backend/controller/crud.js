@@ -4,16 +4,17 @@ const nodemailer = require("nodemailer");
 module.exports = {
     addWish: async (req,res) => {
         console.log(req.params.id)
-        // try {
-        //     await User.findOneAndUpdate(
-        //         {_id: req.params.id},
-        //         {
-        //             $push: { wishlist: req.body },
-        //         }
-        //     )            
-        // } catch (error) {
-        //     console.error(error)
-        // }
+        try {
+            await User.findOneAndUpdate(
+                {_id: req.params.id},
+                {
+                    $push: { wishlist: req.body },
+                }
+            )    
+            return res.status(200).json('wishlist updated')         
+        } catch (error) {
+            console.error(error)
+        }
     },
         deleteWish: async (req,res) => {
         console.log('delete has started ',req.params.id)
