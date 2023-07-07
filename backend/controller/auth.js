@@ -119,8 +119,7 @@ module.exports = {
       checkUser:  async (req,res) => {
         console.log(req.params.id)
         const getUser = User.find({_id: req.params.id})
-        console.log(getUser)
-        //res.send( getUser )
+        res.send( getUser )
     }
     
 }
