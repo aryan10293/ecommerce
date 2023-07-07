@@ -101,7 +101,7 @@ module.exports = {
             //   "currentUser": req.user
             // }));
             
-            res.send( {"currentUser": req.user})
+            res.send(user)
           });
         })(req, res, next);
       },
