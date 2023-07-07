@@ -1,6 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 function AddToCart(props) {
+
    // const [cart, setCart] = React.useState([...props.data])
     const handleClick = (e) => {
         e.preventDefault()
@@ -20,9 +21,8 @@ function AddToCart(props) {
           'brand': brand,
           'item': item,
     }
-    console.log(productData)
         try {
-            const response = await fetch('https://the-random-shop.onrender.com/cart', {
+            const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.state}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)
@@ -31,6 +31,7 @@ function AddToCart(props) {
             console.log(data)
         } catch (error) {
             console.log(error)
+            
         }
  }
   add()

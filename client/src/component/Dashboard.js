@@ -9,7 +9,7 @@ function Dashboard(props) {
   const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([]);
- // const [cart, setCart] = React.useState([...props.state.cart])
+  const [cart, setCart] = React.useState([])
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -40,21 +40,22 @@ function Dashboard(props) {
         }
         fetchData()
     }, []);
-  // React.useEffect(() => {
-  //   async function fetchData(){
-  //     try {
-  //     const response = await fetch('https://the-random-shop.onrender.com/cart', {
-  //         method: 'GET',
-  //         credentials: 'include'
-  //     });
-  //     const data = await response.json();
-  //     setCart(data)
-  //     } catch (error) {
-  //     console.error(error);
-  //     }
-  //   }
-  //     fetchData()
-  // }, []);
+  React.useEffect(() => {
+    async function fetchData(){
+      try {
+      const response = await fetch(`https://the-random-shop.onrender.com/cart/${userId}`, {
+          method: 'GET',
+          credentials: 'include'
+      });
+      const data = await response.json();
+      setCart(data)
+      } catch (error) {
+      console.error(error);
+      }
+    }
+      fetchData()
+  }, []);
+  console.log('this is whishlist:',wishList, 'this is cart:', cart)
   const handleClick = async(e) => {
     const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
     const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
@@ -99,7 +100,7 @@ function Dashboard(props) {
     <>
         <Navbar />
         <div className='flex justify-center'>
-            <h1 className="mb-6 text-5xl font-bold ">Welcome Back {props.state.userName}</h1>
+            <h1 className="mb-6 text-5xl font-bold ">Welcome Back {props.state[0].userName}</h1>
         </div>
         <ul className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {data.map((item, i) => {
@@ -130,7 +131,7 @@ function Dashboard(props) {
                                   wishList.map(x => x.id).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
-                                  <AddToCart state={props.state}/>
+                                  <AddToCart state={userId}/>
                                   {/*data={cart}*/}
                               </div>
                           </div>

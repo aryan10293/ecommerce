@@ -3,11 +3,12 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
-    const [cart,setCart] = React.useState(props.cart)
+    console.log(props, 'this is props crom carts.js')
+    const [cart,setCart] = React.useState([])
     const user = {
         userId: props.state._id
   }
-    const randomNumber = Math.floor(Math.random() * 10000000000000000) + 1;
+    const randomNumber = Math.floor(Math.random() * 10000000000000) + 1;
     const randomSmallNumber = Math.floor(Math.random() * 10000000) + 1
     const number = {
         num1: randomNumber,
@@ -19,7 +20,7 @@ function Cart(props) {
 
     const fetchData = async () => {
     try {
-        const response = await fetch('https://the-random-shop.onrender.com/cart', {
+        const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
         method: 'GET',
         credentials: 'include',
         });
