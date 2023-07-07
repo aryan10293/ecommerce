@@ -13,7 +13,7 @@ router.post('/login', authController.postLogin)
 router.get("/logout", authController.logout)
 router.get("/getLoginUser/:id", authController.checkUser)
 router.get('/wish/:id', crudController.getWishList)
-router.get('/cart', crudController.getCart)
+router.get('/cart/:id', crudController.getCart)
 
 router.put('/wish/:id', crudController.addWish)
 router.put('/cart', crudController.addCart)
