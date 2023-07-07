@@ -35,7 +35,8 @@ module.exports = {
             {
                 $push: { cart: req.body },
             }
-        )            
+        )   
+        return res.status(200).json('cart updated')         
     } catch (error) {
         console.error(error)
     }
