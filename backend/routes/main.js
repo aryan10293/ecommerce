@@ -16,7 +16,7 @@ router.get('/wish/:id', crudController.getWishList)
 router.get('/cart/:id', crudController.getCart)
 
 router.put('/wish/:id', crudController.addWish)
-router.put('/cart', crudController.addCart)
+router.put('/cart/:id', crudController.addCart)
 
 router.post('/confirmorder', crudController.confirmOrder)
 router.options('/deletecart', (req, res) => {

@@ -31,7 +31,7 @@ module.exports = {
     addCart: async (req,res) => {
     try {
         await User.findOneAndUpdate(
-            {_id: req.user.id},
+            {_id: req.params.id},
             {
                 $push: { cart: req.body },
             }
