@@ -63,7 +63,7 @@ module.exports = {
     },
     getWishList: async (req,res) => {
         try {
-           let cool =  await User.find(req.user)   
+           let cool =  await User.find({_id: req.params.id})   
            res.send(cool[0].wishlist)         
         } catch (error) {
             console.error(error)
