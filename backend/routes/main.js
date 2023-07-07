@@ -11,7 +11,7 @@ router.post('/createaccount', authController.postCreateAccount)
 router.post('/login', authController.postLogin)
 
 router.get("/logout", authController.logout)
-router.get("/idk", authController.checkUser)
+router.get("/getLoginUser/:id", authController.checkUser)
 router.get('/wish/:id', crudController.getWishList)
 router.get('/cart', crudController.getCart)
 

@@ -117,8 +117,10 @@ module.exports = {
         });
       },
       checkUser:  async (req,res) => {
-        console.log(req.user)
-        res.send( req.user || null )
+        console.log(req.params.id)
+        const getUser = User.findById({_id: req.params.id})
+        console.log(getUser)
+        //res.send( getUser )
     }
     
 }
