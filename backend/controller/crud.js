@@ -74,7 +74,7 @@ module.exports = {
         try {
            let cool =  await User.find({_id: req.params.id})  
            console.log(cool, 'coool beans') 
-           //res.send(cool[0].cart)         
+           res.send(cool[0].cart)         
         } catch (error) {
             console.error(error)
         }
