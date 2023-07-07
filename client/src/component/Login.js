@@ -36,7 +36,7 @@ function Login() {
         })
         const loginData = await login.json()
        // setUser(loginData)
-        console.log(loginData)
+       localStorage.setItem('loginUser', loginData._id)
         //window.location.href = "/dashboard"
     }
   return (

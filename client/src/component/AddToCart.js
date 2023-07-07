@@ -1,7 +1,7 @@
 import React from 'react'
 import { Fragment } from 'react'
 function AddToCart(props) {
-    const [cart, setCart] = React.useState([...props.data])
+   // const [cart, setCart] = React.useState([...props.data])
     const handleClick = (e) => {
         e.preventDefault()
         const brand = e.target.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML
@@ -34,7 +34,7 @@ function AddToCart(props) {
         }
  }
   add()
-    setCart([...cart, productData])
+   // setCart([...cart, productData])
     }
   return (
     <>

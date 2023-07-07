@@ -16,12 +16,7 @@ function App() {
   let userLogin = false
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('https://the-random-shop.onrender.com/idk', {
-          method: 'GET',
-          credentials: 'include'
-      })
-      const data = await response.json()
-      setUser(data)
+      setUser(localStorage.getItem('loginUser'))
     }
     fetchData()
   },[])
@@ -47,18 +42,6 @@ function App() {
   return (
     <>
         <Routes>
-          <Route 
-          path="/product/:id"
-          element={userLogin ? <Product /> : <Navigate  to='/login'/>} />
-          <Route 
-          path="/wishlist"
-          element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
-          <Route 
-          path="/checkout/:oid/:tid"
-          element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
-          <Route 
-          path="/cart"
-          element={userLogin ? <Cart state={user} cart={cart}/> : <Navigate  to='/login'/>} />
           <Route 
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user}/> : <Navigate  to='/login'/>} />
@@ -97,3 +80,15 @@ export default App;
 //     console.error(error);
 //     }
 // }
+          // <Route 
+          // path="/product/:id"
+          // element={userLogin ? <Product /> : <Navigate  to='/login'/>} />
+          // <Route 
+          // path="/wishlist"
+          // element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
+          // <Route 
+          // path="/checkout/:oid/:tid"
+          // element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
+          // <Route 
+          // path="/cart"
+          // element={userLogin ? <Cart state={user} cart={cart}/> : <Navigate  to='/login'/>} />

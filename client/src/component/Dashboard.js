@@ -6,9 +6,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToCart from './AddToCart'
 function Dashboard(props) {
+  const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
   const [data, setData] = React.useState([]);
-  const [wishList, setWishlist] = React.useState([...props.state.wishlist]);
-  const [cart, setCart] = React.useState([...props.state.cart])
+  const [wishList, setWishlist] = React.useState([]);
+ // const [cart, setCart] = React.useState([...props.state.cart])
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -26,7 +27,7 @@ function Dashboard(props) {
   React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('https://the-random-shop.onrender.com/wish', {
+      const response = await fetch(`https://the-random-shop.onrender.com/wish/${userId}`, {
           method: 'GET',
           credentials: 'include'
       });
@@ -39,21 +40,21 @@ function Dashboard(props) {
         }
         fetchData()
     }, []);
-  React.useEffect(() => {
-    async function fetchData(){
-      try {
-      const response = await fetch('https://the-random-shop.onrender.com/cart', {
-          method: 'GET',
-          credentials: 'include'
-      });
-      const data = await response.json();
-      setCart(data)
-      } catch (error) {
-      console.error(error);
-      }
-    }
-      fetchData()
-  }, []);
+  // React.useEffect(() => {
+  //   async function fetchData(){
+  //     try {
+  //     const response = await fetch('https://the-random-shop.onrender.com/cart', {
+  //         method: 'GET',
+  //         credentials: 'include'
+  //     });
+  //     const data = await response.json();
+  //     setCart(data)
+  //     } catch (error) {
+  //     console.error(error);
+  //     }
+  //   }
+  //     fetchData()
+  // }, []);
   const handleClick = async(e) => {
     const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
     const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
@@ -74,7 +75,7 @@ function Dashboard(props) {
     }
     wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {
-            const response = await fetch('https://the-random-shop.onrender.com/wish', {
+            const response = await fetch(`https://the-random-shop.onrender.com/wish/${userId}`, {
                 method: method,
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)
@@ -129,7 +130,8 @@ function Dashboard(props) {
                                   wishList.map(x => x.id).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
-                                  <AddToCart state={props.state} data={cart}/>
+                                  <AddToCart state={props.state}/>
+                                  {/*data={cart}*/}
                               </div>
                           </div>
                         </div>
