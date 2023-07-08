@@ -68,12 +68,20 @@ function App() {
            element={userLogin ? <Wishlist user={userId}/> : <Navigate  to='/login'/>} />
 
           <Route 
+          path="/product/:id"
+          element={userLogin ? <Product user={userId}/> : <Navigate  to='/login'/>} />
+
+          <Route 
           path='/'
           element={!userLogin ? <Home /> : <Navigate to='/dashboard'/>} />
 
           <Route 
           path='/login'
           element={!userLogin ? <Login /> : <Navigate to='/dashboard'/>} />
+
+          <Route 
+          path="/checkout/:oid/:tid"
+          element={userLogin ? <Checkout state={user} user={userId}/> : <Navigate  to='/login'/>} />
 
           <Route 
           path='/signup'

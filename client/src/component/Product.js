@@ -2,12 +2,12 @@ import React from 'react'
 import { Fragment } from 'react'
 import Navbar from './Navbar'
 import { useParams } from 'react-router-dom';
-const Product = () => {
+const Product = (props) => {
     const [images,setImages] = React.useState([])
     const [data, setData] = React.useState([])
     const {id} = useParams()
     React.useEffect(() => {
-        async function fetchData(){
+        async function fetchData(props){
             try {
                 const response = await fetch('https://dummyjson.com/products');
                 const data = await response.json();
@@ -39,7 +39,7 @@ const Product = () => {
             item: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[1].innerHTML
         }
         try {
-            const response = await fetch('/cart', {
+            const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(productData)

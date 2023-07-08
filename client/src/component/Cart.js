@@ -3,7 +3,6 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
-    console.log(props, 'this is props crom carts.js')
     const [cart,setCart] = React.useState([])
     const user = {
         userId: props.state._id
@@ -58,7 +57,7 @@ function Cart(props) {
 
 const handleOrderClick = async (e) => {
     try {
-        await fetch('https://the-random-shop.onrender.com/confirmorder', {
+        await fetch(`https://the-random-shop.onrender.com/confirmorder/${props.user}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({cart, user, randomNumber, randomSmallNumber})
@@ -130,7 +129,7 @@ const handleOrderClick = async (e) => {
                                                 <p className="text-2xl leading-normal text-gray-800">Total</p>
                                                 <p className="text-2xl font-bold leading-normal text-right text-gray-800">${cart.reduce((a,b) => {return Number(b.price.substring(1)) + a}, 0) + 35 + 30}</p>
                                             </div>
-                                        <Link to={`/checkout/${randomSmallNumber}/${randomNumber}`} onClick={handleOrderClick}>
+                                        <Link to={{ pathname: `/checkout/${randomSmallNumber}/${randomNumber}`, state: { data: cart} }} onClick={handleOrderClick}>
                                              <button  className="text-base leading-none w-full py-5 bg-gray-800 border-gray-800 border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 text-white">
                                                 Checkout
                                             </button>                                       

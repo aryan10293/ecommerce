@@ -8,11 +8,11 @@ function Checkout(props) {
   const order = numbers[0]; 
   const tracking = numbers[1]
   console.log()
-    const [cart,setCart] = React.useState([...props.state.cart])
+    const [cart,setCart] = React.useState([...props.state[0].cart])
     React.useEffect(() => {
     async function fetchData(){
       try {
-      const response = await fetch('https://the-random-shop.onrender.com/cart', {
+      const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
           method: 'GET',
           credentials: 'include'
       });

@@ -33,7 +33,8 @@ console.log(wishlist)
                 body: JSON.stringify(product)
                 })
             const data = await response.json()
-            console.log(data)
+
+             alert(`Added ${product.item} to cart`)
         } catch (error) {
             console.log(error)
         }
