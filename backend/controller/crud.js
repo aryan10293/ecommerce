@@ -134,7 +134,7 @@ let htmlContent = `
 
        try {
             const updateUser = await User.findOneAndUpdate(
-                {_id: req.body.user.userId},
+                {_id: req.params.id},
                 {$push: { orderHistory: [req.body.cart]}},
                 {new:true}
             ) 

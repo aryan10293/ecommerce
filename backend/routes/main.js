@@ -18,7 +18,7 @@ router.get('/cart/:id', crudController.getCart)
 router.put('/wish/:id', crudController.addWish)
 router.put('/cart/:id', crudController.addCart)
 
-router.post('/confirmorder', crudController.confirmOrder)
+router.post('/confirmorder/:id', crudController.confirmOrder)
 router.options('/deletecart', (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'DELETE');
