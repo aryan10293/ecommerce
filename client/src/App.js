@@ -59,9 +59,13 @@ function App() {
           path="/dashboard"
           element={ userLogin ? <Dashboard state={user} user={userId}/> : <Navigate  to='/login'/>} />
 
-           <Route 
+          <Route 
            path="/cart"
            element={userLogin ? <Cart state={user} user={userId}/> : <Navigate  to='/login'/>} />
+          
+          <Route 
+           path="/wishlist"
+           element={userLogin ? <Wishlist user={userId}/> : <Navigate  to='/login'/>} />
 
           <Route 
           path='/'

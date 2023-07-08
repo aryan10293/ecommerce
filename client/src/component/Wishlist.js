@@ -3,29 +3,31 @@ import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 function Wishlist(props) {
+    console.log(props.user, 'this is the wiushlist')
     const [wishlist, setWishlist] = React.useState([])
     React.useEffect(() => {
     async function fetchData(){
             try {
-            const response = await fetch('https://the-random-shop.onrender.com/wish', {
+            const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
                 method: 'GET',
                 credentials: 'include'
             });
             const data = await response.json();
+            console.log(data)
             setWishlist(data)
             } catch (error) {
             console.error(error);
             }
         }
         fetchData()
-    }, [])
-
+    }, [props.user, props.userId])
+console.log(wishlist)
     const handleClick = async(e) => {
         const product = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
         )
         try {
-            const response = await fetch('https://the-random-shop.onrender.com/cart', {
+            const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
                 method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(product)
@@ -43,7 +45,7 @@ function Wishlist(props) {
             {/* Desktop Responsive Start */}
             <div className="hidden sm:flex flex-col justify-start items-start">
                 <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
-                    <h1 className="text-4xl font-semibold leading-9 text-gray-800">Favourites</h1>
+                    <h1 className="text-4xl font-semibold leading-9 text-gray-800">Favorites</h1>
                     <p className="text-base leading-4 text-gray-600 pb-1">({wishlist.length})</p>
                 </div>
                 <table className="w-full mt-16 whitespace-nowrap">
