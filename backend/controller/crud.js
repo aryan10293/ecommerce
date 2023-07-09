@@ -52,30 +52,34 @@ module.exports = {
     whyWontItWork: async (req,res) => {
         // console.log(req.body.product)
         // console.log(req.body.user.userId)
-        try {
-            const updateUser = await User.findOneAndUpdate(
-                {_id: req.params.id},
-                {$pull: { cart: req.body.product }},
-                {new:true}
-            )   
-            
-        if (!updateUser) {
-            return res.status(404).json({ error: 'User not found' });
-        }
+        if(req.params.id !== null){
+            try {
+                const updateUser = await User.findOneAndUpdate(
+                    {_id: req.params.id},
+                    {$pull: { cart: req.body.product }},
+                    {new:true}
+                )   
+                    
+                if (!updateUser) {
+                    return res.status(404).json({ error: 'User not found' });
+                }
 
-        return res.status(200).json(updateUser.cart);
-        } catch (error) {
-            console.error(error);
-            return res.status(500).json({ error: 'Internal Server Error' });
+                return res.status(200).json(updateUser.cart);
+                } catch (error) {
+                    console.error(error);
+                    return res.status(500).json({ error: 'Internal Server Error' });
+            }
         }
 
     },
     getWishList: async (req,res) => {
-        try {
-           let cool =  await User.find({_id: req.params.id})   
-           res.send(cool[0].wishlist)         
-        } catch (error) {
-            console.error(error)
+        if(req.params.id !== null){
+            try {
+                let cool =  await User.find({_id: req.params.id})   
+                res.send(cool[0].wishlist)         
+            } catch (error) {
+                console.error(error)
+            }
         }
     },
     getCart: async (req,res) => {
@@ -90,27 +94,29 @@ module.exports = {
         }
     },
     clearCart: async (req, res) => {
-    try {
-        const userId = req.params.id;
+        if(req.params.id !== null){
+                try {
+                const userId = req.params.id;
 
-        // Find the user document by ID
-        const user = await User.findById(userId);
+                // Find the user document by ID
+                const user = await User.findById(userId);
 
-        if (!user) {
-        return res.status(404).json({ success: false, message: 'User not found' });
+                if (!user) {
+                return res.status(404).json({ success: false, message: 'User not found' });
+                }
+
+                // Clear the cart array
+                user.cart = [];
+
+                // Save the updated user document
+                await user.save();
+
+                res.json({ success: true, message: 'Cart cleared successfully' });
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({ success: false, message: 'An error occurred while clearing the cart' });
+            }
         }
-
-        // Clear the cart array
-        user.cart = [];
-
-        // Save the updated user document
-        await user.save();
-
-        res.json({ success: true, message: 'Cart cleared successfully' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'An error occurred while clearing the cart' });
-    }
     },
     confirmOrder: async (req,res) => { 
     let htmlContent = `
