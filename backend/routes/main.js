@@ -26,7 +26,7 @@ router.options('/deletecart', (req, res) => {
 
   res.sendStatus(204); // Send a successful response with status code 204 (No Content)
 })
-router.delete('/deletecart', crudController.whyWontItWork)
+router.delete('/deletecart/:id', crudController.whyWontItWork)
 router.delete('/wish/:id', crudController.deleteWish)
 router.delete('/clearcart/:id', crudController.clearCart)
 module.exports = router;

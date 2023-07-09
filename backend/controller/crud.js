@@ -27,7 +27,8 @@ module.exports = {
                         {
                             $pull: { wishlist: req.body },
                         }
-                    )            
+                    )   
+                    return res.status(200).json('wishlist updated')          
                 } catch (error) {
                     console.error(error)
                 }
@@ -51,7 +52,7 @@ module.exports = {
         // console.log(req.body.user.userId)
         try {
             const updateUser = await User.findOneAndUpdate(
-                {_id: req.body.user.userId},
+                {_id: req.params.id},
                 {$pull: { cart: req.body.product }},
                 {new:true}
             )   
