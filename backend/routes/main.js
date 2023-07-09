@@ -28,4 +28,5 @@ router.options('/deletecart', (req, res) => {
 })
 router.delete('/deletecart', crudController.whyWontItWork)
 router.delete('/wish/:id', crudController.deleteWish)
+router.delete('/clearcart/:id', crudController.clearCart)
 module.exports = router;
