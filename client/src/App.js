@@ -46,7 +46,9 @@ function App() {
       console.error(error);
       }
     }
+    if(userId !== null){
       fetchData()
+    }
   }, []);
   if(user !== null){
     userLogin = true

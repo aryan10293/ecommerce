@@ -3,7 +3,6 @@ import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
 function Wishlist(props) {
-    console.log(props.user, 'this is the wiushlist')
     const [wishlist, setWishlist] = React.useState([])
     React.useEffect(() => {
     async function fetchData(){
@@ -13,7 +12,6 @@ function Wishlist(props) {
                 credentials: 'include'
             });
             const data = await response.json();
-            console.log(data)
             setWishlist(data)
             } catch (error) {
             console.error(error);
@@ -21,7 +19,6 @@ function Wishlist(props) {
         }
         fetchData()
     }, [props.user, props.userId])
-console.log(wishlist)
     const handleClick = async(e) => {
         const product = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
@@ -38,6 +35,28 @@ console.log(wishlist)
         } catch (error) {
             console.log(error)
         }
+    }
+    const handleDelete = async(e) => {
+        const product = Object.fromEntries(
+            Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
+        )
+       // console.log(product)
+            if(props.user !== null){
+                try {
+                    const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
+                        method: 'DELETE',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(product)
+                        })
+                    const data = await response.json()
+                    alert(`Deleted ${product.item} from wishlist`)
+                    console.log(data)
+                } catch (error) {
+                    console.log(error)
+                }
+                let newList = wishlist.filter(x => x.id !== product.id )
+                setWishlist(newList)
+            }
     }
   return (
     <>
@@ -78,8 +97,8 @@ console.log(wishlist)
                                 </Link>
                             </th>
                             <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">
-                                <button className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800">
-                                    <p>Remove Item</p>
+                                <button onClick={handleDelete} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-800 text-base leading-none text-red-600 hover:text-red-800">
+                                    Remove Item
                                 </button>                               
                             </th>
                             <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">

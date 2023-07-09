@@ -65,14 +65,14 @@ function Dashboard(props) {
     let productData
     let method;
     async function add(){
-           productData = {
+        productData = {
           'id': id,
           'price': price,
           'imgSrc': imgSrc,
           'brand': brand,
           'item': item,
           'img': img
-    }
+        }
     wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
         try {
             const response = await fetch(`https://the-random-shop.onrender.com/wish/${userId}`, {

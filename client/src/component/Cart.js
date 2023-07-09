@@ -42,7 +42,7 @@ function Cart(props) {
   //make logout button
   console.log(product)
   try {
-    await fetch('https://the-random-shop.onrender.com/deletecart', {
+    await fetch(`https://the-random-shop.onrender.com/deletecart/${props.user}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({product, user})
