@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 
 module.exports = {
     addWish: async (req,res) => {
-        console.log(req.params.id)
+        console.log(req.params.id, 'ius this add wish')
         if(req.params.id !== null){
             try {
                 await User.findOneAndUpdate(
