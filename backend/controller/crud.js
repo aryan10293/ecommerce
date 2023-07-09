@@ -35,17 +35,19 @@ module.exports = {
             }
     },
     addCart: async (req,res) => {
-    try {
-        await User.findOneAndUpdate(
-            {_id: req.params.id},
-            {
-                $push: { cart: req.body },
+        if(req.params.id !== null){
+            try {
+                await User.findOneAndUpdate(
+                    {_id: req.params.id},
+                    {
+                        $push: { cart: req.body },
+                    }
+                )   
+                return res.status(200).json('cart updated')         
+            } catch (error) {
+                console.error(error)
             }
-        )   
-        return res.status(200).json('cart updated')         
-    } catch (error) {
-        console.error(error)
-    }
+        }
     },
     whyWontItWork: async (req,res) => {
         // console.log(req.body.product)
