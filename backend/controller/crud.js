@@ -19,7 +19,7 @@ module.exports = {
         }
     },
     deleteWish: async (req,res) => {
-        console.log('delete has started ',req.params.id)
+        console.log(req.body)
             if(req.params.id !== null){
                 try {
                     await User.findOneAndUpdate(
