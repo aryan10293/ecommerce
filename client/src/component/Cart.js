@@ -65,6 +65,14 @@ const handleOrderClick = async (e) => {
     } catch (error) {
         console.error(error);
     }
+    try {
+        await fetch(`https://the-random-shop.onrender.com/clearcart/${props.user}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
   React.useEffect(() => {
   console.log('updated cart', cart);
