@@ -4,6 +4,7 @@ const nodemailer = require("nodemailer");
 module.exports = {
     addWish: async (req,res) => {
         console.log(req.params.id, 'ius this add wish')
+        console.log(req.body)
         if(req.params.id !== null){
             try {
                 await User.findOneAndUpdate(
