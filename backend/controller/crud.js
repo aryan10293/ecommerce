@@ -6,16 +6,30 @@ module.exports = {
         console.log(req.params.id, 'ius this add wish')
         console.log(req.body)
         if(req.params.id !== null){
-            try {
-                await User.findOneAndUpdate(
-                    {_id: req.params.id},
-                    {
-                        $push: { wishlist: req.body },
-                    }
-                )    
-                return res.status(200).json('wishlist updated')         
-            } catch (error) {
-                console.error(error)
+            if(req.body.method){
+                try {
+                    await User.findOneAndUpdate(
+                        {_id: req.params.id},
+                        {
+                            $push: { wishlist: req.body.productData },
+                        }
+                    )    
+                    return res.status(200).json('wishlist item added')         
+                } catch (error) {
+                    console.error(error)
+                }
+            } else {
+                try {
+                    await User.findOneAndUpdate(
+                        {_id: req.params.id},
+                        {
+                            $pull: { wishlist: req.body },
+                        }
+                    )   
+                    return res.status(200).json('wishlist item deleted')          
+                } catch (error) {
+                    console.error(error)
+                }
             }
         }
     },
