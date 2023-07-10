@@ -9,7 +9,6 @@ function Dashboard(props) {
   const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([]);
-  const [cart, setCart] = React.useState([])
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -40,21 +39,6 @@ function Dashboard(props) {
         }
         fetchData()
     }, []);
-  React.useEffect(() => {
-    async function fetchData(){
-      try {
-      const response = await fetch(`https://the-random-shop.onrender.com/cart/${userId}`, {
-          method: 'GET',
-          credentials: 'include'
-      });
-      const data = await response.json();
-      setCart(data)
-      } catch (error) {
-      console.error(error);
-      }
-    }
-      fetchData()
-  }, []);
   const handleClick = async(e) => {
             const productData = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))

@@ -9,10 +9,6 @@ function Cart(props) {
   }
     const randomNumber = Math.floor(Math.random() * 10000000000000) + 1;
     const randomSmallNumber = Math.floor(Math.random() * 10000000) + 1
-    const number = {
-        num1: randomNumber,
-        num2: randomSmallNumber
-    }
     React.useEffect(() => {
     fetchData();
     }, []);
@@ -48,7 +44,6 @@ function Cart(props) {
       body: JSON.stringify({product, user})
     });
   } catch (error) {
-    console.log('FFQEQWERFQWWRGWERG')
     console.error(error);
   }
   console.log('cool')

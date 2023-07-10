@@ -13,7 +13,6 @@ import Cart from './component/Cart';
 function App() {
   const [userId,setUserId] = React.useState(null)
   const [user, setUser] = React.useState(null)
-  const [cart,setCart] = React.useState([])
   let userLogin = false
   React.useEffect(() => {
     const fetchData = async () => {
@@ -33,23 +32,6 @@ function App() {
     }
     fetchData()
   },[])
-    React.useEffect(() => {
-    async function fetchData(){
-      try {
-      const response = await fetch(`https://the-random-shop.onrender.com/cart/${userId}`, {
-          method: 'GET',
-          credentials: 'include'
-      });
-      const data = await response.json();
-      setCart(data)
-      } catch (error) {
-      console.error(error);
-      }
-    }
-    if(userId !== null){
-      fetchData()
-    }
-  }, []);
   if(user !== null){
     userLogin = true
   }
