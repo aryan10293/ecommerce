@@ -23,7 +23,7 @@ module.exports = {
                     await User.findOneAndUpdate(
                         {_id: req.params.id},
                         {
-                            $pull: { wishlist: req.body },
+                            $pull: { wishlist: {id: iHaveNoIdeaWhatImDoing}},
                         }
                     )   
                     return res.status(200).json('wishlist item deleted')          
