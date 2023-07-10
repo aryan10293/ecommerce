@@ -37,24 +37,27 @@ function Wishlist(props) {
         }
     }
     const handleDelete = async(e) => {
-        const product = Object.fromEntries(
+        const method = false
+        const productData = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.dataset))
         )
+        console.log(productData)
+        const iHaveNoIdeaWhatImDoing = productData.id
        // console.log(product)
             if(props.user !== null){
                 try {
                     const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
-                        method: 'DELETE',
+                        method: 'PUT',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(product)
+                        body: JSON.stringify({productData, method, iHaveNoIdeaWhatImDoing})
                         })
                     const data = await response.json()
-                    alert(`Deleted ${product.item} from wishlist`)
+                    alert(`Deleted ${productData.item} from wishlist`)
                     console.log(data)
                 } catch (error) {
                     console.log(error)
                 }
-                let newList = wishlist.filter(x => x.id !== product.id )
+                let newList = wishlist.filter(x => x.id !== productData.id )
                 setWishlist(newList)
             }
     }

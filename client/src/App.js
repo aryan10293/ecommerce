@@ -95,32 +95,5 @@ function App() {
 }
 
 export default App;
-      // <div className="App">
-      //   <Navbar />
-      // </div>
 
-      //   const checkUser = async () => {
-//     try {
-//     const response = await fetch('http://localhost:2011/idk', {
-//         method: 'GET',
-//         credentials: 'include'
-//     });
-//     const data = await response.json();
-//     console.log(data)
-//     } catch (error) {
-//     console.error(error);
-//     }
-// }
-          // <Route 
-          // path="/product/:id"
-          // element={userLogin ? <Product /> : <Navigate  to='/login'/>} />
-          // <Route 
-          // path="/wishlist"
-          // element={userLogin ? <Wishlist /> : <Navigate  to='/login'/>} />
-          // <Route 
-          // path="/checkout/:oid/:tid"
-          // element={userLogin ? <Checkout state={user}/> : <Navigate  to='/login'/>} />
-          // <Route 
-          // path="/cart"
-          // element={userLogin ? <Cart state={user} cart={cart}/> : <Navigate  to='/login'/>} />
           

@@ -56,29 +56,34 @@ function Dashboard(props) {
       fetchData()
   }, []);
   const handleClick = async(e) => {
-    const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
-    const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
-    const brand = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML;
-    const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
-    const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
-    const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
-    let productData
+            const productData = Object.fromEntries(
+            Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))
+        )
+        console.log(productData)
+    // const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
+    // const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
+    // const brand = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML;
+    // const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
+    // const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
+    // const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
+    // let productData
     let method;
     async function add(){
-        productData = {
-          'id': id,
-          'price': price,
-          'imgSrc': imgSrc,
-          'brand': brand,
-          'item': item,
-          'img': img
-        }
-    wishList.map(x => x.id).includes(productData.id) ? method = 'DELETE' : method = 'PUT'
+        // productData = {
+        //   'id': id,
+        //   'price': price,
+        //   'imgSrc': imgSrc,
+        //   'brand': brand,
+        //   'item': item,
+        //   'img': img
+        // }
+        const iHaveNoIdeaWhatImDoing = productData.id
+    wishList.map(x => x.id).includes(productData.id) ? method = false : method = true
         try {
             const response = await fetch(`https://the-random-shop.onrender.com/wish/${userId}`, {
-                method: method,
+                method: 'PUT',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify(productData)
+                body: JSON.stringify({productData, method, iHaveNoIdeaWhatImDoing})
                 })
             const data = await response.json()
             console.log(data)
@@ -87,7 +92,7 @@ function Dashboard(props) {
         }
  }
  add()
-    if(method === 'PUT'){
+    if(method){
       setWishlist([...wishList, productData])
     } else {
       let newList = wishList.filter(x => x.id !== productData.id )
@@ -95,6 +100,7 @@ function Dashboard(props) {
     }
 
   }
+  console.log(wishList.map(x => x.id).includes('2'))
   return (
     <>
         <Navbar />
@@ -105,7 +111,7 @@ function Dashboard(props) {
             {data.map((item, i) => {
                    return (
                      <>
-                        <li key={item.id} data-id={item.id}>
+                        <li key={item.id} data-item={item.title} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.images[3]}>
                           <div className="bg-white">
                           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                               <div className="group relative">
@@ -127,7 +133,7 @@ function Dashboard(props) {
                               </div>
                               <div className="mr-auto">
                                 {
-                                  wishList.map(x => x.id).includes(item.id) ?
+                                  wishList.map(x => Number(x.id)).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
                                   <AddToCart state={userId}/>
