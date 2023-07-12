@@ -48,7 +48,7 @@ app.use(
 
 
 app.use(cors({
-  origin: 'https://drejstore.netlify.app',
+  origin: 'https://ecommerce-2t1a-a2ykth1il-aryan10293.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
