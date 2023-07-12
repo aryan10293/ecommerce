@@ -117,9 +117,15 @@ module.exports = {
         });
       },
       checkUser:  async (req,res) => {
-        console.log(req.params.id)
-        const getUser = await User.find({_id: req.params.id})
-        res.send( getUser )
+        try {
+          if(req.params.is !== null){
+            console.log(req.params.id)
+            const getUser = await User.find({_id: req.params.id})
+            res.send( getUser )
+          }
+        } catch (error) {
+          console.log(error)
+        }
     }
     
 }
