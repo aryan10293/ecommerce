@@ -26,6 +26,7 @@ function AddToCart(props) {
                 body: JSON.stringify(productData)
                 })
             const data = await response.json()
+            alert(`Added ${productData.item} to cart`)
             console.log(data)
         } catch (error) {
             console.log(error)
