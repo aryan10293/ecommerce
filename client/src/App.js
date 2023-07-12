@@ -10,20 +10,21 @@ import Wishlist from './component/Wishlist';
 import Checkout from './component/Checkout';
 import Cart from './component/Cart';
 function App() {
-  const [userId,setUserId] = React.useState(null)
+  const [userId,setUserId] = React.useState(localStorage.getItem('loginUser')||null)
   const [user, setUser] = React.useState(null)
   let userLogin = false
   React.useEffect(() => {
     const fetchData = async () => {
-      setUserId(localStorage.getItem('loginUser'))
       try {
-      const response = await fetch(`https://the-random-shop.onrender.com/getLoginUser/${localStorage.getItem('loginUser')}`, {
-          method: 'GET',
-          credentials: 'include'
-      });
-      const data = await response.json();
-      setUser(data)
-      setUserId(localStorage.getItem('loginUser'))
+        if(userId !== null){
+            const response = await fetch(`https://the-random-shop.onrender.com/getLoginUser/${localStorage.getItem('loginUser')}`, {
+              method: 'GET',
+              credentials: 'include'
+          });
+          const data = await response.json();
+          setUser(data)
+          setUserId(localStorage.getItem('loginUser'))
+        }
       } catch (error) {
       console.error(error);
       }
