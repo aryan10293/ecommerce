@@ -45,12 +45,14 @@ function Signup() {
             body: JSON.stringify(newUser),
         })
         const data = await reg.json()
+        alert('Account created, please login')
+        window.location.href = "/login"
         console.log(data)
         setPassword('')
         setEmail('')
         setName('')
-        //window.location.href = "/login"
         } catch(err) {
+            alert('Account was not created, please try again later')
             console.error(err)
         }
 
@@ -201,7 +203,7 @@ function Signup() {
                                 className="text-danger transition duration-150 ease-in-out hover:text-danger-600 focus:text-danger-600 active:text-danger-700"
                                 >
                             <p className="mb-0 mt-2 pt-1 text-sm font-semibold">
-                            Already have an account? login
+                            Already have an account? login!
                             </p>
                             </a>
                         </div>

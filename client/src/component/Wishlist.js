@@ -43,7 +43,6 @@ function Wishlist(props) {
         )
         console.log(productData)
         const iHaveNoIdeaWhatImDoing = productData.id
-       // console.log(product)
             if(props.user !== null){
                 try {
                     const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {

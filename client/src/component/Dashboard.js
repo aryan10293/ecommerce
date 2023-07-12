@@ -15,7 +15,6 @@ function Dashboard(props) {
         const response = await fetch('https://dummyjson.com/products');
         const data = await response.json();
         setData([...data.products]);
-        //console.log(data.products[0].id === userWishlist)
       } catch (error) {
         console.error(error);
       }
@@ -44,23 +43,8 @@ function Dashboard(props) {
             Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))
         )
         console.log(productData)
-    // const imgSrc = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].src
-    // const price = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[0].childNodes[0].childNodes[1].innerHTML;
-    // const brand = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[1].innerHTML;
-    // const item = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[1].childNodes[0].childNodes[1].innerHTML; 
-    // const id = Number(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset.id)
-    // const img = e.target.parentElement.parentElement.parentElement.parentElement.childNodes[0].childNodes[0].childNodes[0].childNodes[0].src
-    // let productData
     let method;
     async function add(){
-        // productData = {
-        //   'id': id,
-        //   'price': price,
-        //   'imgSrc': imgSrc,
-        //   'brand': brand,
-        //   'item': item,
-        //   'img': img
-        // }
         const iHaveNoIdeaWhatImDoing = productData.id
     wishList.map(x => x.id).includes(productData.id) ? method = false : method = true
         try {
