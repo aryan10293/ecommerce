@@ -17,7 +17,7 @@ function App() {
     const fetchData = async () => {
       try {
         if(userId !== null){
-            const response = await fetch(`https://the-random-shop.onrender.com/getLoginUser/${localStorage.getItem('loginUser')}`, {
+            const response = await fetch(`https://the-random-shop.onrender.com/getLoginUser/${userId}`, {
               method: 'GET',
               credentials: 'include'
           });
