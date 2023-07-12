@@ -48,7 +48,7 @@ app.use(
 
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: 'https://drejstore.netlify.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
