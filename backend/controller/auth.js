@@ -60,9 +60,7 @@ module.exports = {
                 }
                 //return next()
                 // res.redirect("/profile");
-                res.send({
-                  "newUser": user
-                })
+                res.status(200).json(user)
               });
             });
           }
@@ -96,12 +94,12 @@ module.exports = {
               return next(err);
             }
             req.flash("success", { msg: "Success! You are logged in." });
-            console.log(req.user)
+            //console.log(req.user)
             // res.redirect(req.session.returnTo || res.send({
             //   "currentUser": req.user
             // }));
             
-            res.send(user)
+            res.status(200).json(user);
           });
         })(req, res, next);
       },
