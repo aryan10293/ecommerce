@@ -47,14 +47,14 @@ app.use(
   app.use(flash());
 
 app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerce-2t1a.vercel.app/');
+  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerce-2t1a.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   next();
 })
 app.use(cors({
-  origin: 'https://ecommerce-2t1a.vercel.app/',
+  origin: 'https://ecommerce-2t1a.vercel.app',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
