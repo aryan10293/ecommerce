@@ -5,10 +5,12 @@ import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToCart from './AddToCart'
+import InCart from './InCart'
 function Dashboard(props) {
   const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([]);
+  const [cart, setCart] = React.useState([])
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -38,8 +40,25 @@ function Dashboard(props) {
         }
         fetchData()
     }, []);
+
+  React.useEffect(() => {
+    async function fetchData(){
+      try {
+      const response = await fetch(`https://the-random-shop.onrender.com/cart/${userId}`, {
+          method: 'GET',
+          credentials: 'include'
+      });
+      const data = await response.json();
+      setCart(data)
+      } catch (error) {
+      console.error(error);
+      }
+        
+        }
+        fetchData()
+    }, []);
   const handleClick = async(e) => {
-            const productData = Object.fromEntries(
+        const productData = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.dataset))
         )
         console.log(productData)
@@ -68,7 +87,14 @@ function Dashboard(props) {
     }
 
   }
-  console.log(wishList.map(x => x.id).includes('2'))
+  const handleCart = (e) => {
+        const productData = Object.fromEntries(
+            Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.dataset))
+        )
+        console.log(productData)
+    setCart([...cart, productData])
+  }
+  console.log(cart)
   return (
     <>
         <Navbar />
@@ -104,7 +130,10 @@ function Dashboard(props) {
                                   wishList.map(x => Number(x.id)).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
                                   <button type="" className="text-gray-500 hover:text-red-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> }
-                                  <AddToCart state={userId}/>
+                                  {
+                                  cart.map(x => Number(x.id)).includes(item.id) ?
+                                  <InCart /> : 
+                                  <AddToCart onClick={handleCart} state={userId} item={item.id}/> }
                                   {/*data={cart}*/}
                               </div>
                           </div>

@@ -36,7 +36,8 @@ const Product = (props) => {
             price: e.target.parentElement.parentElement.previousElementSibling.childNodes[0].childNodes[0].innerHTML,
             img: image[2].src,
             brand: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[0].innerHTML,
-            item: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[1].innerHTML
+            item: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[1].innerHTML,
+            id: e.target.parentElement.parentElement.previousElementSibling.previousElementSibling.childNodes[1].dataset.id
         }
         try {
             const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
@@ -76,8 +77,8 @@ const Product = (props) => {
                 <div className="md:ml-24 space-y-6 md:space-y-12">
 
                     <div className="md:mt-24 space-y-3">
-                        <h3 className="font-bold text-black-400">{data.brand}</h3>
-                        <h1 className="text-4xl md:text-6xl font-bold">{data.title}</h1>
+                        <h3  className="font-bold text-black-400">{data.brand}</h3>
+                        <h1 data-id={data.id} className="text-4xl md:text-6xl font-bold">{data.title}</h1>
                         <p className="md:mt-16 text-gray-500">{data.description}</p>
                     </div>
                     <div className="flex md:mt-12 flex-row md:flex-col md:justify-start md:items-start justify-between items-center">

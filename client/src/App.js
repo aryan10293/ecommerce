@@ -41,19 +41,19 @@ function App() {
         <Routes>
           <Route 
           path="/dashboard"
-          element={ userLogin ? <Dashboard state={user} user={userId}/> : <Navigate  to='/login'/>} />
+          element={ userLogin ? <Dashboard state={user} user={userId}/> : <Navigate  to='/'/>} />
 
           <Route 
            path="/cart"
-           element={userLogin ? <Cart state={user} user={userId}/> : <Navigate  to='/login'/>} />
+           element={userLogin ? <Cart state={user} user={userId}/> : <Navigate  to='/'/>} />
           
           <Route 
            path="/wishlist"
-           element={userLogin ? <Wishlist user={userId}/> : <Navigate  to='/login'/>} />
+           element={userLogin ? <Wishlist user={userId}/> : <Navigate  to='/'/>} />
 
           <Route 
           path="/product/:id"
-          element={userLogin ? <Product user={userId}/> : <Navigate  to='/login'/>} />
+          element={userLogin ? <Product user={userId}/> : <Navigate  to='/'/>} />
 
           <Route 
           path='/'
@@ -61,7 +61,7 @@ function App() {
 
           <Route 
           path="/checkout/:oid/:tid"
-          element={userLogin ? <Checkout state={user} user={userId}/> : <Navigate  to='/login'/>} />
+          element={userLogin ? <Checkout state={user} user={userId}/> : <Navigate  to='/'/>} />
 
           <Route 
           path='/signup'
