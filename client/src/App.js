@@ -4,7 +4,6 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Dashboard from './component/Dashboard';
 import Login from './component/Login';
 import Signup from './component/Signup';
-import Home from './component/Home'
 import Product from './component/Product';
 import Wishlist from './component/Wishlist';
 import Checkout from './component/Checkout';

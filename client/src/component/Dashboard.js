@@ -125,7 +125,7 @@ function Dashboard(props) {
                                   <p   className="likes text-sm font-medium text-gray-900" id='brand'>{item.brand}</p>
                                 </div>
                               </div>
-                              <div className="mr-auto">
+                              <div className="mr-auto flex">
                                 {
                                   wishList.map(x => Number(x.id)).includes(item.id) ?
                                   <button type="" className="text-red-500 hover:text-gray-500" onClick={handleClick}><FontAwesomeIcon icon={faHeart} /></button> : 
