@@ -57,10 +57,6 @@ function App() {
 
           <Route 
           path='/'
-          element={!userLogin ? <Home /> : <Navigate to='/dashboard'/>} />
-
-          <Route 
-          path='/login'
           element={!userLogin ? <Login /> : <Navigate to='/dashboard'/>} />
 
           <Route 
