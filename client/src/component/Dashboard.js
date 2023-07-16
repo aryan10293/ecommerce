@@ -1,16 +1,25 @@
 import React from 'react'
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToCart from './AddToCart'
 import InCart from './InCart'
+import ArrayLengthContext from './ArrayLength'
 function Dashboard(props) {
   const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
   const [data, setData] = React.useState([]);
   const [wishList, setWishlist] = React.useState([]);
   const [cart, setCart] = React.useState([])
+  const { updateLength } = useContext(ArrayLengthContext)
+  // to be delted
+  let [cartLength, SetCartLength] = React.useState(0)
+  const handleCount = () => {
+
+  }
+  // to be deleted
+
   React.useEffect(() => {
     async function fetchData() {
       try {
@@ -50,6 +59,7 @@ function Dashboard(props) {
       });
       const data = await response.json();
       setCart(data)
+      SetCartLength(data.length)
       } catch (error) {
       console.error(error);
       }
@@ -91,13 +101,13 @@ function Dashboard(props) {
         const productData = Object.fromEntries(
             Array.from(Object.entries(e.target.parentElement.parentElement.parentElement.parentElement.dataset))
         )
-        console.log(productData)
     setCart([...cart, productData])
+    updateLength(cart.length)
   }
-  console.log(cart)
   return (
     <>
-        <Navbar />
+    <p onClick={(handleCount)}>cool</p>
+        <Navbar num={cartLength}/>
         <div className='flex justify-center'>
             <h1 className="mb-6 text-5xl font-bold ">Welcome Back {props.state[0].userName}</h1>
         </div>
