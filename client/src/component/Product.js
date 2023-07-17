@@ -7,6 +7,8 @@ const Product = (props) => {
     const [images,setImages] = React.useState([])
     const [data, setData] = React.useState([])
     const [cart, setCart] = React.useState([])
+    let [wishLength, setWishLength] = React.useState(0)
+    let [cartLength, SetCartLength] = React.useState(0)
     const {id} = useParams()
     React.useEffect(() => {
         async function fetchData(props){
@@ -27,6 +29,22 @@ const Product = (props) => {
             }
         fetchData()
     }, [id])
+    React.useEffect(() => {
+        async function fetchData(){
+        try {
+        const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        const data = await response.json();
+        setWishLength(data.length)
+        } catch (error) {
+        console.error(error);
+        }
+            
+            }
+            fetchData()
+    }, []);
     const image = [
        { src: images[1]},
         { src: images[2]},
@@ -42,6 +60,7 @@ const Product = (props) => {
         });
         const data = await response.json();
         setCart(data)
+        SetCartLength(data.length)
         } catch (error) {
         console.error(error);
         }
@@ -67,6 +86,7 @@ const Product = (props) => {
             const data = await response.json()
             alert(`Added ${productData.item} to cart`)
             setCart([...cart, productData])
+            SetCartLength(cart.length + 1)
             console.log(data)
         } catch (error) {
             console.log(error)
@@ -74,7 +94,7 @@ const Product = (props) => {
     }
     return (
         <>
-        <Navbar />
+        <Navbar num={cartLength} wish={wishLength}/>
         <div className="">
             <div className="flex justify-between p-5 mt-8 space-y-3 flex-col lg:flex-row">
                 <div className="md:px-5 mr-auto">

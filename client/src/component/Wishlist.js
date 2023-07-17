@@ -2,21 +2,43 @@ import React from 'react'
 import Navbar from './Navbar'
 import { Link } from 'react-router-dom'
 import { Fragment } from 'react'
+import InCart from './InCart'
 function Wishlist(props) {
     const [wishlist, setWishlist] = React.useState([])
+    const [cart, setCart] = React.useState([])
+    let [cartLength, SetCartLength] = React.useState(0)
+    let [wishLength, setWishLength] = React.useState(0)
     React.useEffect(() => {
-    async function fetchData(){
-            try {
-            const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
-                method: 'GET',
-                credentials: 'include'
-            });
-            const data = await response.json();
-            setWishlist(data)
-            } catch (error) {
-            console.error(error);
+        async function fetchData(){
+                try {
+                const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                console.log(data[0].item)
+                setWishlist(data.filter(x => x.item !== undefined))
+                setWishLength(data.filter(x => x.item !== undefined).length)
+                } catch (error) {
+                console.error(error);
+                }
             }
-        }
+        fetchData()
+    }, [props.user, props.userId])
+    React.useEffect(() => {
+        async function fetchData(){
+                try {
+                const response = await fetch(`https://the-random-shop.onrender.com/cart/${props.user}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+                const data = await response.json();
+                setCart(data)
+                SetCartLength(data.length)
+                } catch (error) {
+                console.error(error);
+                }
+            }
         fetchData()
     }, [props.user, props.userId])
     const handleClick = async(e) => {
@@ -30,7 +52,8 @@ function Wishlist(props) {
                 body: JSON.stringify(product)
                 })
             const data = await response.json()
-
+            setCart([...cart, product])
+            SetCartLength(cart.length + 1)
              alert(`Added ${product.item} to cart`)
         } catch (error) {
             console.log(error)
@@ -58,17 +81,19 @@ function Wishlist(props) {
                 }
                 let newList = wishlist.filter(x => x.id !== productData.id )
                 setWishlist(newList)
+                setWishLength(newList.length)
             }
     }
+    console.log(cart.map(x => Number(x.id)))
   return (
     <>
-      <Navbar />
+      <Navbar num={cartLength} wish={wishLength}/>
        <div className=" py-12">
             {/* Desktop Responsive Start */}
             <div className="hidden sm:flex flex-col justify-start items-start">
                 <div className="pl-4 lg:px-10 2xl:px-20 flex flex-row justify-center items-end space-x-4">
                     <h1 className="text-4xl font-semibold leading-9 text-gray-800">Favorites</h1>
-                    <p className="text-base leading-4 text-gray-600 pb-1">({wishlist.length})</p>
+                    <p className="text-base leading-4 text-gray-600 pb-1">({wishLength})</p>
                 </div>
                 <table className="w-full mt-16 whitespace-nowrap">
                     <thead aria-label="table heading" className="w-full h-16 text-left py-6 bg-gray-50 border-gray-200 border-b ">
@@ -104,9 +129,12 @@ function Wishlist(props) {
                                 </button>                               
                             </th>
                             <th className="my-10 pl-4 lg:pl-12  2xl:pl-28 pr-4 2xl:pr-20">
-                                <button onClick={handleClick} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-base leading-none text-green-600 hover:text-green-800">
+                                {
+                                  cart.map(x => Number(x.id)).includes(Number(item.id)) ?
+                                  <InCart /> : 
+                                  <button onClick={handleClick} className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-800 text-base leading-none text-green-600 hover:text-green-800">
                                     Add To Cart
-                                </button>                             
+                                </button>  }                            
                             </th>
                         </tr>
                         )

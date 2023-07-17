@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 function Cart(props) {
     const [cart,setCart] = React.useState([])
+    let [wishLength, setWishLength] = React.useState(0)
+    let [cartLength, SetCartLength] = React.useState(0)
     const user = {
         userId: props.state._id
   }
@@ -21,10 +23,27 @@ function Cart(props) {
         });
         const data = await response.json();
         setCart(data);
+        SetCartLength(data.length)
     } catch (error) {
         console.error(error,'i');
     }
     };
+    React.useEffect(() => {
+        async function fetchData(){
+        try {
+        const response = await fetch(`https://the-random-shop.onrender.com/wish/${props.user}`, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        const data = await response.json();
+        setWishLength(data.length)
+        } catch (error) {
+        console.error(error);
+        }
+            
+            }
+            fetchData()
+    }, []);
 
     const removeHandleClick = async (e) => {
     const product = {
@@ -43,6 +62,7 @@ function Cart(props) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({product, user})
     });
+    SetCartLength(cart.length - 1)
   } catch (error) {
     console.error(error);
   }
@@ -72,11 +92,15 @@ const handleOrderClick = async (e) => {
   React.useEffect(() => {
   console.log('updated cart', cart);
 }, [cart]);
+
+const BackButton = () => {
+    window.history.back();
+  };
  return (
         <>
             <div>
                     <div className="w-full h-full bg-black bg-opacity-90 top-0 overflow-y-auto overflow-x-hidden fixed sticky-0" id="chec-div">
-                    <Navbar />
+                    <Navbar num={cartLength} wish={wishLength}/>
                         <div className="w-full absolute z-10 right-0 h-full overflow-x-hidden transform translate-x-0 transition ease-in-out duration-700" id="checkout">
                             <div className="flex md:flex-row flex-col justify-end" id="cart">
                                 <div className="lg:w-1/2 w-full md:pl-10 pl-4 pr-10 md:pr-4 md:py-12 py-8 bg-white overflow-y-auto overflow-x-hidden h-screen" id="scroll">
@@ -85,9 +109,9 @@ const handleOrderClick = async (e) => {
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                             <polyline points="15 6 9 12 15 18" />
                                         </svg>
-                                        <p className="text-sm pl-2 leading-none">Back</p>
+                                        <p className="text-sm pl-2 leading-none" onClick={BackButton}>Back</p>
                                     </div>
-                                    <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Cart</p>
+                                    <p className="text-5xl font-black leading-10 text-gray-800 pt-3">Cart({cartLength})</p>
                                 {cart.map(item => {
                                     return (
                                         <div key={item.id} className="md:flex items-center mt-14 py-8 border-t border-gray-200">

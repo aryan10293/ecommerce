@@ -1,26 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import ArrayLengthContext from './ArrayLength';
-function Navbar(props) {
+function Navbar({num, wish}) {
     const navigate = useNavigate();
     const searchRef = React.useRef()
     const [search, setSearch] = React.useState('')
-    // const [ length, updateLength ] = React.useState(ArrayLengthContext)
     const [userId, setUserId] = React.useState(localStorage.getItem('loginUser'))
-//     React.useEffect(() => {
-//     // Fetch data from API and update the array
-//     const fetchData = async () => {
-//        const response = await fetch(`https://the-random-shop.onrender.com/cart/${userId}`, {
-//             method: 'GET',
-//             credentials: 'include'
-//         })
-//       const data = await response.json();
-//       updateLength(data.length); // Update the length in the context
-//     };
-
-//     fetchData();
-//   }, [updateLength, userId])
   
     const handleChange = (e) => {
         setSearch(e.target.value)
@@ -37,7 +22,6 @@ function Navbar(props) {
         localStorage.clear()
         window.location.href = "/"
     }
-    console.log(props.num)
   return (
         <header className="py-4 shadow-sm bg-white">
         <div className="container flex items-center justify-between">
@@ -61,7 +45,7 @@ function Navbar(props) {
                     <div className="text-2xl">
                         <i className="fa-solid fa-heart"></i>
                     </div>
-                    <Link to='/wishlist'><div className="text-xs leading-3">Wishlist</div></Link>
+                    <Link to='/wishlist'><div className="text-xs leading-3">Wishlist({wish})</div></Link>
                     <div
                         className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
@@ -73,7 +57,7 @@ function Navbar(props) {
                     <Link to={{
                         pathname:'/cart',
                         state: {prop1: 'lol'}}}
-                    ><div className="text-xs leading-3">Cart({props.num})</div></Link>
+                    ><div className="text-xs leading-3">Cart({num})</div></Link>
                     <div
                         className="absolute -right-3 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">
                     </div>
