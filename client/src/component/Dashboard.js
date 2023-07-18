@@ -112,12 +112,12 @@ function Dashboard(props) {
             {data.map((item, i) => {
                    return (
                      <>
-                        <li key={item.id} data-item={item.title} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.images[3]}>
+                        <li key={item.id} data-item={item.title} data-price={item.price} data-id={item.id} data-brand={item.brand} data-img={item.images[0]}>
                           <div className="bg-white">
                           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
                               <div className="group relative">
                                 <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
-                                    <Link to={`/product/${item.title}`}><img src={item.images[3]} alt={item.description} className="h-full w-full object-cover object-center lg:h-full lg:w-full" /></Link>
+                                    <Link to={`/product/${item.title}`}><img src={item.images[0]} alt={item.description} className="h-full w-full object-cover object-center lg:h-full lg:w-full" /></Link>
                                 </div>
                                 <div className="mt-4 flex justify-between">
                                   <div>
