@@ -52,7 +52,7 @@ function Signup() {
         })
         const data = await reg.json()
         alert('Account created, please login')
-        window.location.href = "/login"
+        window.location.href = "/"
         console.log(data)
         setPassword('')
         setEmail('')
