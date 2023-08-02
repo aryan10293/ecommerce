@@ -35,12 +35,12 @@ Demo password: 12345678
 4. go to config folder and make a .env file
 5. go get a mongo db string
 6. add DB_STRING in env file
-7. app port 
+7. add port 
 
 ## Usage
 
 1. run `node server.js`
-2. Navigate to `localhost:8080`
+2. Navigate to `localhost:${added port}`
 
 <!-- 
 ## More Projects
