@@ -11,11 +11,12 @@ Platform to help increase local business online sales.
 
 
 ## Optimizations
-One thing I would optimize is the UI. I would like to give it a more modern look and feel. I would also like to make the UX a lot better. instead of alert messageI would like to add display message or interaction that users would understand 
+I want to optimize the UI to give it a modern look and feel. I want to focus on enhancing the UX with user-friendly display messages and interactions, replacing the old-fashioned alert messages. This way, our users will have a smoother and more enjoyable experience. 
 
 ## Lessons Learned
 
-Utilized callback functions in the server to try and build a modular and scalable backend. Through this, I learned , how to effectively simplify backend routes into independent functions
+In this project, I learned to call APIs effectively in React and optimized the useEffect hook for better performance. I also enjoyed the rewarding challenge of securing user accounts and ensuring their safety throughout the application.
+
 
 ## Demo Login
 
