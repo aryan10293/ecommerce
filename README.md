@@ -1,6 +1,7 @@
 <a href="https://ecommerce-2t1a.vercel.app/" target="_blank">Visit Here</a>
 <a href="https://ecommerce-2t1a.vercel.app/" target="_blank">
-<img src="https://github.com/CharlesCreativeContent/CharlesCreativeContent/blob/main/images/gif1.gif?raw=true" width="100%" alt="https://ecommerce-2t1a.vercel.app/"/>
+<!-- <img src="https://github.com/CharlesCreativeContent/CharlesCreativeContent/blob/main/images/gif1.gif?raw=true" width="100%" alt="https://ecommerce-2t1a.vercel.app/"/> -->
+
 </a>
 
 Platform to help increase local business online sales. 
@@ -37,27 +38,28 @@ Demo password: demo
 1. run `node server.js`
 2. Navigate to `localhost:8080`
 
+<!-- 
 ## More Projects
 
 <table bordercolor="#66b2b2">
   
   <tr>
     <td width="33.3%"  style="align:center;" valign="top">
-<a target="_blank" href="https://github.com/CharlesCreativeContent/Rigley2-FlappyBug">Rigley 2: Flappy Bug</a>
+        <a target="_blank" href="https://github.com/CharlesCreativeContent/Rigley2-FlappyBug">Rigley 2: Flappy Bug</a>
         <br />
-      <a target="_blank" href="https://github.com/CharlesCreativeContent/Rigley2-FlappyBug">
+        <a target="_blank" href="https://github.com/CharlesCreativeContent/Rigley2-FlappyBug">
             <img src="https://github.com/CharlesCreativeContent/CharlesCreativeContent/raw/main/images/gif2.gif" width="100%"  alt="Rigley 2: Flappy Bug"/>
         </a>
     </td>
     <td width="33.3%" valign="top">
-<a target="_blank" href="https://github.com/CharlesCreativeContent/matching-card-game"> Matching Card Game</a>
-      <br />
+        <a target="_blank" href="https://github.com/CharlesCreativeContent/matching-card-game"> Matching Card Game</a>
+        <br />
         <a target="_blank" href="https://github.com/CharlesCreativeContent/matching-card-game">
           <img src="https://github.com/CharlesCreativeContent/CharlesCreativeContent/raw/main/images/gif3.gif" width="100%" alt="Matching Card Game"/>
         </a>
     </td>
     <td width="33.3%" valign="top">
-<a target="_blank" href="https://github.com/CharlesCreativeContent/Portfolio2021">Portfolio</a>
+        <a target="_blank" href="https://github.com/CharlesCreativeContent/Portfolio2021">Portfolio</a>
         <br />
         <a target="_blank" href="https://github.com/CharlesCreativeContent/Portfolio2021/">
           <img src="https://github.com/CharlesCreativeContent/CharlesCreativeContent/raw/main/images/gif4.gif" width="100%" alt="Portfolio"/>
@@ -65,3 +67,5 @@ Demo password: demo
     </td>
   </tr>
 </table>
+-->
+
