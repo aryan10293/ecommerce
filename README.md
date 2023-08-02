@@ -22,9 +22,9 @@ In this project, I learned to call APIs effectively in React and optimized the u
 ## Demo Login
 
 
-Demo Email: demo@demo.com
+Demo Email: test@test.com
 
-Demo password: demo
+Demo password: 12345678
 
 
 ## Installation
