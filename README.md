@@ -30,8 +30,12 @@ Demo password: 12345678
 ## Installation
 
 1. Clone repo
-2. run `npm install`
-3. update DATABASE_URL in config/database
+2. cd backend
+3. run `npm install`
+4. go to config folder and make a .env file
+5. go get a mongo db string
+6. add DB_STRING in env file
+7. app port 
 
 ## Usage
 
