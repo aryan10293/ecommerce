@@ -6,7 +6,8 @@
 Platform to help increase local business online sales. 
 
 
-## Tech used: ![HTML5 BADGE](https://img.shields.io/static/v1?label=|&message=HTML5&color=23555f&style=plastic&logo=html5)![CSS BADGE](https://img.shields.io/static/v1?label=|&message=CSS3&color=285f65&style=plastic&logo=css3)![SASS BADGE](https://img.shields.io/static/v1?label=|&message=SASS&color=2b625f&style=plastic&logo=sass)![BOOTSTRAP BADGE](https://img.shields.io/static/v1?label=|&message=BOOTSTRAP&color=316c5e&style=plastic&logo=bootstrap)![JAVASCRIPT BADGE](https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=3c7f5d&style=plastic&logo=javascript)![EXPRESS BADGE](https://img.shields.io/static/v1?label=|&message=EXPRESS&color=bbb111&style=plastic&logo=express)![MONGODB BADGE](https://img.shields.io/static/v1?label=|&message=MONGO-DB&color=cdd148&style=plastic&logo=mongodb)
+## Tech used: ![HTML BADGE](https://img.shields.io/static/v1?label=|&message=HTML&color=23555f&style=plastic&logo=html5) ![CSS BADGE](https://img.shields.io/static/v1?label=|&message=CSS&color=285f65&style=plastic&logo=css3) ![REACT BADGE](https://img.shields.io/static/v1?label=|&message=REACT&color=61dafb&style=plastic&logo=react) ![JAVASCRIPT BADGE](https://img.shields.io/static/v1?label=|&message=JAVASCRIPT&color=3c7f5d&style=plastic&logo=javascript) ![TAILWIND CSS BADGE](https://img.shields.io/static/v1?label=|&message=TAILWIND%20CSS&color=38b2ac&style=plastic&logo=tailwind-css) ![NODEJS BADGE](https://img.shields.io/static/v1?label=|&message=NODE.JS&color=339933&style=plastic&logo=node.js) ![EXPRESS BADGE](https://img.shields.io/static/v1?label=|&message=EXPRESS&color=bbb111&style=plastic&logo=express) ![MONGODB BADGE](https://img.shields.io/static/v1?label=|&message=MONGODB&color=cdd148&style=plastic&logo=mongodb)
+
 
 
 ## Optimizations
